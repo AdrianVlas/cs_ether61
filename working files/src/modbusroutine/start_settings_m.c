@@ -44,5 +44,6 @@ void global_component_installation(void) {
   constructorOLANBigComponent(&(config_array[OLANBIGCOMPONENT]));//подготовка компонента output LAN
   constructorIMMSBigComponent(&(config_array[IMMSBIGCOMPONENT]));//подготовка компонента input MMS
   constructorIGOOSEBigComponent(&(config_array[IGOOSEBIGCOMPONENT]));//подготовка компонента input GOOSE
+  constructorResursBigComponent(&(config_array[RESURSBIGCOMPONENT]));//подготовка компонента resurs
 }//global_vareiables_installation_bo(void)
 

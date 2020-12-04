@@ -39,8 +39,8 @@ enum {
  OLANBIGCOMPONENT        ,//34 подготовка компонента output LAN
  IMMSBIGCOMPONENT        ,//35 подготовка компонента input MMS
  IGOOSEBIGCOMPONENT      ,//36 подготовка компонента input GOOSE
-
- TOTAL_COMPONENT         ,//34
+ RESURSBIGCOMPONENT      ,//35
+ TOTAL_COMPONENT         ,//36
 
  MARKER_OUTPERIMETR   = 100000,
  MARKER_ERRORPERIMETR = 100001,

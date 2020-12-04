@@ -22,7 +22,6 @@ void superSortParam(int size, unsigned int *param);
 int superControlParam(int param);
 int superControlParam_gi(int param);
 int superValidParam(unsigned int param);
-
 void constructorYustBigComponent(COMPONENT_OBJ *);
 void constructorDVBigComponent(COMPONENT_OBJ *);
 void constructorDVSmallComponent(COMPONENT_OBJ *);
@@ -60,5 +59,6 @@ void constructorIUSmallComponent(COMPONENT_OBJ *);
 void constructorOLANBigComponent(COMPONENT_OBJ *);
 void constructorIMMSBigComponent(COMPONENT_OBJ *);
 void constructorIGOOSEBigComponent(COMPONENT_OBJ *);
+void constructorResursBigComponent(COMPONENT_OBJ *);
 
 #endif
