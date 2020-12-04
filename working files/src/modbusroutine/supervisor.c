@@ -893,34 +893,28 @@ int outputFunc1PacketEncoder(int adrUnit, int adrBit, int cntBit)
   for(; idxDataBit<cntBit; idxDataBit++)
     {
       int result = superReaderBit(adrBit+ idxDataBit);
-      int idxReg = idxDataBit/16;
 
       switch(result)
         {
         case MARKER_OUTPERIMETR:
-          //dataRegister[idxReg] = 0;
           break;
         case MARKER_ERRORPERIMETR:
-          dataRegister[idxReg] = -2;
-//          break;
           return Error_modbus(adrUnit, // address,
-                              outputPacket[1],//function,
-                              ERROR_ILLEGAL_DATA_ADDRESS,//error,
-                              outputPacket);//output_data
+                                outputPacket[1],//function,
+                                ERROR_ILLEGAL_DATA_ADDRESS,//error,
+                                outputPacket);//output_data
         default:
         {
-          dataRegister[idxReg] |= (result<<(idxDataBit%16));
+          dataRegister[idxDataBit/8] |= (result<<(idxDataBit%8));
           flag = 0;
         }
         }//switch
-      //qDebug()<<"result= "<<dataRegister[idxReg];
     }//for
   if(flag)//незначащие пакеты недопустимы
     return Error_modbus(adrUnit, // address,
-                        outputPacket[1],//function,
-                        ERROR_ILLEGAL_DATA_ADDRESS,//error,
-                        outputPacket);//output_data
-  superPostReadAction();//action после чтения
+                          outputPacket[1],//function,
+                          ERROR_ILLEGAL_DATA_ADDRESS,//error,
+                          outputPacket);//output_data
 
   int idxOutputPacket = 0;
 //adrUnit
@@ -929,35 +923,21 @@ int outputFunc1PacketEncoder(int adrUnit, int adrBit, int cntBit)
 //numFunc
   idxOutputPacket++;
 
-  if(cntBit<9)
-    {
 //cnt
-      outputPacket[idxOutputPacket] = (unsigned char)1;
+      int cntByte = cntBit/8;
+      if(cntBit%8) cntByte++;
+      outputPacket[idxOutputPacket] = cntByte;
       idxOutputPacket++;
 //data
-      outputPacket[idxOutputPacket] = (unsigned char)dataRegister[0];
-      idxOutputPacket++;
-    }//if
-  else
-    {
-//cnt
-      int cntReg = cntBit/16;
-      if(cntBit%16) cntReg++;
-      outputPacket[idxOutputPacket] = (unsigned char)cntReg*2;
-      idxOutputPacket++;
-//data
-      for(int i=0; i<cntReg; i++)
+      for(int i=0; i<cntByte; i++)
         {
-//Ldata
+//data
           outputPacket[idxOutputPacket] = (unsigned char)(dataRegister[i]&0xFF);
           idxOutputPacket++;
-//Mdata
-          outputPacket[idxOutputPacket] = (unsigned char)((dataRegister[i]>>8)&0xFF);
-          idxOutputPacket++;
         }//for
-    }
+
   return idxOutputPacket;
-}//outputFunc3PacketEncoder(int adrUnit, int adrReg, int cntReg)
+}//outputFunc1PacketEncoder(int adrUnit, int adrBit, int cntBit)
 
 /**************************************/
 //action до чтения
@@ -1121,7 +1101,7 @@ int superReader20(int offsetRegister)
         case 3://минуты секунды
           return ((buffer_for_RS485_read_record_log[3] << 8) | buffer_for_RS485_read_record_log[2]);
         case 4://миллисекунды
-          return buffer_for_RS485_read_record_log[1];
+          return 100*((buffer_for_RS485_read_record_log[1]/16)*10 + (buffer_for_RS485_read_record_log[1]%16));
         case 5://идентификатор объекта
           return (word & 0xffff);
         case 6://идентификатор объекта
