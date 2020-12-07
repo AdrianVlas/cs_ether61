@@ -581,13 +581,13 @@ void* pv;
 		 }
          l = P.pShOrderCalcNum[1]; 
 //        j = i >> 8;//        i &= 0xff;//        i += arIdxLUAreaListElem[j-1];
-        if (l>0){//Save State Outs
-            pv = (sLV.arrLUAreaListElem[i]).pvLU;
-            sLV.chLUNumOut = static_cast<CLUBase*>( pv)->chNumOutput;
-            for (long lii = 0; lii < sLV.chLUNumOut;lii++)
-            sLV.shLUStateOut |= static_cast<char*>((static_cast<CLUBase*>( pv)->pOut))[lii] << lii;
-            //Read Out
-        }
+        //!if (l>0){//Save State Outs
+        //!    pv = (sLV.arrLUAreaListElem[i]).pvLU;
+        //!    sLV.chLUNumOut = static_cast<CLUBase*>( pv)->chNumOutput;
+        //!    for (long lii = 0; lii < sLV.chLUNumOut;lii++)
+        //!    sLV.shLUStateOut |= static_cast<char*>((static_cast<CLUBase*>( pv)->pOut))[lii] << lii;
+        //!    //Read Out
+        //!}
         pv = LUSelectorRV(i);
         if( l == 0 ){//|| sLV.shLocalIdxCounter == lIdxCounter
             lIdxCounter++;

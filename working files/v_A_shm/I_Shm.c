@@ -71,7 +71,8 @@ long ChangeCfg(void* pv){
   TIM9_Init();
   
   TIM9Start();
-  DoCalcWrp();
+  if(lVl == 0)//! Is really helpfull for avoid crash program when have bad input param
+	  DoCalcWrp();
   TIM9Stop();
   i = TIM_GetCounter(TIM9);
   //lCtrElem = i*417/10000;
@@ -79,7 +80,8 @@ long ChangeCfg(void* pv){
   //lCtrElem = i*660/10000;
   TIM_SetCounter(TIM9,0);
     TIM9Start();
-  //DoCalcStatInfoWrp();
+
+  //if (lVl == 0)DoCalcStatInfoWrp();
   TIM9Stop();
   //Out Param in Terminal
   

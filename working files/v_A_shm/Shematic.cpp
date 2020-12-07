@@ -4579,7 +4579,7 @@ struct {
             
         }
         else if (n < 0){
-				break;//rsLV.chVal |= 1;
+			rsLV.chVal |= 1;break;
         }
         else{
             rsLV.chVal |= 2;
