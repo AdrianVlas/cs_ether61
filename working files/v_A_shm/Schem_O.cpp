@@ -594,10 +594,11 @@ void* pv;
             P.pLOrderCalcNum ++;//= lIdxCounter;
         }
         else{
-            //Fix State            
+            
+			//Fix State            
             for (long lii = 0; lii < sLV.chLUNumOut;lii++)
             sLV.shLUStateOutChk |= static_cast<char*>((static_cast<CLUBase*>( pv)->pOut))[lii] << lii;
-            
+            lIdxCounter++;P.pLOrderCalcNum ++;continue;
             if(sLV.shLUStateOutChk != sLV.shLUStateOut){
                 long j = sLV.shLocalIdxCounter + 1;
                 sLV.pV = static_cast<void*>(P.pCh);
