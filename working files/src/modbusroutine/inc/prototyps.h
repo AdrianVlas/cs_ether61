@@ -60,5 +60,6 @@ void constructorIUSmallComponent(COMPONENT_OBJ *);
 void constructorOLANBigComponent(COMPONENT_OBJ *);
 void constructorIMMSBigComponent(COMPONENT_OBJ *);
 void constructorIGOOSEBigComponent(COMPONENT_OBJ *);
+void constructorResursBigComponent(COMPONENT_OBJ *resursbigcomp);
 
 #endif
