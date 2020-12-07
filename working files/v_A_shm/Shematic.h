@@ -134,7 +134,7 @@ public:
     static long GetTrueOrderNum(void);
     void DetectCircutLinks(void);
     void SetupLULinks(void *pv);
-    //	friend void GetHIDLU(void**ppv,long lIdxLUinStng );
+    //friend void GetHIDLU(void**ppv,long lIdxLUinStng );
     long Init2(void);
     void SetupCLUDInput_0_1StngParam(void *pv);
     void SetupCLUDout_1_0StngParam(void *pv);
