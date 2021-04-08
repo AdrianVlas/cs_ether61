@@ -1531,7 +1531,7 @@ __result_dym_mem_select allocate_dynamic_memory_for_settings(__action_dym_mem_se
             n = current->n_input_MMS_block;
             if (n != 0)
             {
-              size_block_tx = DIV_TO_HIGHER(FIX_BLOCK_SIGNALS_OUT, 8);
+              size_block_tx = DIV_TO_HIGHER(INPUT_MMS_BLOCK_SIGNALS_OUT, 8);
               p_buffer_tx = ((__LN_INPUT_MMS_BLOCK*)spca_of_p_prt[ID_FB_INPUT_MMS_BLOCK - _ID_FB_FIRST_VAR])->active_state;
               size_struct = sizeof(__LN_INPUT_MMS_BLOCK);
               
@@ -1547,7 +1547,7 @@ __result_dym_mem_select allocate_dynamic_memory_for_settings(__action_dym_mem_se
             n = current->n_network_output_block;
             if (n != 0)
             {
-              size_block_tx = DIV_TO_HIGHER(INPUT_MMS_BLOCK_SIGNALS_OUT, 8);
+              size_block_tx = DIV_TO_HIGHER(NETWORK_OUTPUT_BLOCK_SIGNALS_OUT, 8);
               p_buffer_tx = ((__LN_NETWORK_OUTPUT_BLOCK*)spca_of_p_prt[ID_FB_NETWORK_OUTPUT_BLOCK - _ID_FB_FIRST_VAR])->active_state;
               size_struct = sizeof(__LN_NETWORK_OUTPUT_BLOCK);
             }
@@ -1559,7 +1559,7 @@ __result_dym_mem_select allocate_dynamic_memory_for_settings(__action_dym_mem_se
             n = (current->n_log != 0)*1;
             if (n != 0)
             {
-              size_block_tx = DIV_TO_HIGHER(NETWORK_OUTPUT_BLOCK_SIGNALS_OUT, 8);
+              size_block_tx = DIV_TO_HIGHER(EVENT_LOG_SIGNALS_OUT, 8);
               p_buffer_tx = (uint8_t*)((__LOG_INPUT*)spca_of_p_prt[ID_FB_EVENT_LOG - _ID_FB_FIRST_VAR]);
               size_struct = 0;/*ц€ зм≥нна не мала б використовуватис€ дл€ "∆урналу под≥й"*/
             }
