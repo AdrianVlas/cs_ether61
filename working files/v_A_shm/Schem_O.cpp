@@ -388,7 +388,7 @@ i = static_cast<char*>(pCLUFKey->pIn)[0];
 void LssOptip(void *pObj){
 CLULss& rCLULss = *(static_cast<CLULss*>(pObj));
 
-rCLULss.CalcLssSchematic();	    
+rCLULss.CalcLssSchematic();     
 }
 void BGSOp(void *pObj){
 CBGSig& rCBGSig = *(static_cast<CBGSig*> (pObj));
@@ -435,17 +435,17 @@ refCLUNot_1_1.arrOut[0] = !*(refCLUNot_1_1.arrPchIn[0]);
 void MftOp(void *pObj){
     register long i;
     //register char* pCh;, j
-	CMft& rCMft = *(static_cast<CMft*>(pObj));
-	i = static_cast<long>(*(rCMft.arrPchIn[0]));
-//	j = rCMft.TpauseMft(i);
-//	i = static_cast<long>(*(rCMft.arrPchIn[1]));//Reset
-//	if(rCMft.m_MftSuit.chTypeMft == 1){
-//		
-//		i = rCMft.TWorkMft(i,j);
-//	}
-//	else{
-//		i = rCMft.TdelayMft(i,j);
-//	}
+    CMft& rCMft = *(static_cast<CMft*>(pObj));
+    i = static_cast<long>(*(rCMft.arrPchIn[0]));
+//  j = rCMft.TpauseMft(i);
+//  i = static_cast<long>(*(rCMft.arrPchIn[1]));//Reset
+//  if(rCMft.m_MftSuit.chTypeMft == 1){
+//      
+//      i = rCMft.TWorkMft(i,j);
+//  }
+//  else{
+//      i = rCMft.TdelayMft(i,j);
+//  }
 rCMft.arrOut[0] = static_cast<char>(i);    
 }
 void TrgOp(void *pObj){
@@ -513,7 +513,7 @@ void AltOp(void *pObj){
        "bkpt 1"
        );
     i = rPulseAlt.TAlt(j);
-	
+    
 rPulseAlt.arrOut[0] = static_cast<char>(i);
     register __LN_MEANDER *pLN_MEANDER = static_cast<__LN_MEANDER*>(rPulseAlt.pvCfgLN);
     pLN_MEANDER->active_state[( MEANDER_OUT/8) ] = i<< MEANDER_OUT;    
@@ -521,13 +521,14 @@ rPulseAlt.arrOut[0] = static_cast<char>(i);
 #pragma inline=forced
 void TuOp(void *pObj){
 long i;
-	CLUTu *pCLUTu = static_cast<CLUTu*>(pObj);
+    CLUTu *pCLUTu = static_cast<CLUTu*>(pObj);
 //find Index
 i = pCLUTu->shShemasOrdNumStng;
     i--;
     pCLUTu->arrOut[0] = 0;
 }
-#define MAX_AMOUNT_LINK_ITERATION 3
+//#define MAX_AMOUNT_LINK_ITERATION 7
+
 //Optimization Module Nazar
 void Shematic::DoCalcLU_V01(void){
 register union {
@@ -575,15 +576,16 @@ void* pv;
           
          sLV.shLocalIdxCounter = lIdxCounter;
          i = P.pShOrderCalcNum[0] - 1;//Num Convert to Index
-		 if (i >= 0xcccc || i < 0 ){
-			 lIdxCounter++;
-			 goto endwhile;
-		 }
+         if (i >= 0xcccc || i < 0 ){//Dbg Code for Test only
+             lIdxCounter++;         //Dbg Code for Test only
+             goto endwhile;         //Dbg Code for Test only
+         }
          l = P.pShOrderCalcNum[1]; 
 //        j = i >> 8;//        i &= 0xff;//        i += arIdxLUAreaListElem[j-1];
         if (l>0){//Save State Outs
             pv = (sLV.arrLUAreaListElem[i]).pvLU;
             sLV.chLUNumOut = static_cast<CLUBase*>( pv)->chNumOutput;
+            sLV.shLUStateOut = 0;
             for (long lii = 0; lii < sLV.chLUNumOut;lii++)
             sLV.shLUStateOut |= static_cast<char*>((static_cast<CLUBase*>( pv)->pOut))[lii] << lii;
             //Read Out
@@ -594,12 +596,13 @@ void* pv;
             P.pLOrderCalcNum ++;//= lIdxCounter;
         }
         else{
-            
-			//Fix State            
+            sLV.shLUStateOutChk = 0;
+            //Fix State            
             for (long lii = 0; lii < sLV.chLUNumOut;lii++)
             sLV.shLUStateOutChk |= static_cast<char*>((static_cast<CLUBase*>( pv)->pOut))[lii] << lii;
-            lIdxCounter++;P.pLOrderCalcNum ++;continue;
+            //..lIdxCounter++;P.pLOrderCalcNum ++;continue;
             if(sLV.shLUStateOutChk != sLV.shLUStateOut){
+                //?sLV.shLocalIdxCounter = lIdxCounter;
                 long j = sLV.shLocalIdxCounter + 1;
                 sLV.pV = static_cast<void*>(P.pCh);
                 P.pLOrderCalcNum = &(static_cast<long*>(pExecSeq))[j];
@@ -618,12 +621,15 @@ void* pv;
                 }
                 else{
                     sLV.shCounterLocalIteration++;
-                    if(sLV.shCounterLocalIteration  > MAX_AMOUNT_LINK_ITERATION)
-                        while(1);//Fix Fault
+                    if(sLV.shCounterLocalIteration  > MAX_AMOUNT_LINK_ITERATION){
+                        while(1);//!Fix Fault @In Dbg Ver Program only
                         //Later insert in program Error
+                        
                         //Fix Schematic Error
+                        //return;//! In full Ver
+                    }//..Next from Here -->Restore Pointer and Recalc Elem on lIdxCounter
                 }
-                P.pCh = static_cast<char*>(sLV.pV);//Restore pointer
+                P.pCh = static_cast<char*>(sLV.pV);//Restore pointer 
                 
             }
             else{//Defacto this is (state_curr_el == el(i)) 
@@ -644,11 +650,116 @@ void* pv;
 
 }
 
+void Shematic::DoCalcLU_V02(void){
+register union {
+long* pLOrderCalcNum;
+short* pShOrderCalcNum;
+char  *pCh;
+}P;
+long lAmtProcessObj,lIdxCounter;
+long i,l;
+void* pv;
+    struct {
+    
+    short shMarkerIteration;
+    short shLocalIdxCounter,shTotalIdxCounter,shTotalIteration;
+    short shCounterLocalIteration;
+    void *pV;
+    LUAreaListElem* arrLUAreaListElem;
+    CLUBase* pCLUBase;
+
+    char chLUNumOut;
+    short shLUStateOut,shLUStateOutChk;
+    char* pChLUStateOut,pChLUStateOutChk;
+    short sh_counter_same_link_el_chahge; //,sh_current_el_chahge long lIdx_link_same;
+      
+    } sLV;
+
+       sLV.arrLUAreaListElem = static_cast<LUAreaListElem*>(this->pLUAreaList);
+       sLV.sh_counter_same_link_el_chahge = 0;
+       sLV.shLocalIdxCounter = sLV.shMarkerIteration = sLV.shCounterLocalIteration = 0;
+       sLV.chLUNumOut = sLV.shLUStateOutChk = sLV.shLUStateOut = 0;
+
+    P.pCh = static_cast<char*>(pExecSeq);
+
+    sLV.shTotalIteration = shAmountPossibleIteration;//MAX_AMOUNT_LINK_ITERATION*shAmountExecSeqElem;
+    lAmtProcessObj = shAmountExecSeqElem;
+    sLV.shTotalIdxCounter = lIdxCounter = 0;
+    do {
+        sLV.shTotalIdxCounter++; 
+        if(sLV.shTotalIdxCounter >= sLV.shTotalIteration){ 
+            while(1);//!Fix Fault @In Dbg Ver Program only
+            //Later insert in program Error
+            //Fix Schematic Error
+            //return;//! In full Ver;//Fix Schematic Error
+        }   
+         //?sLV.shLocalIdxCounter = lIdxCounter; In this alg not need
+         i = P.pShOrderCalcNum[0] - 1;//Num Convert to Index
+         l = P.pShOrderCalcNum[1]; 
+        if (l>0){//Save State Outs
+            pv = (sLV.arrLUAreaListElem[i]).pvLU;
+            sLV.chLUNumOut = static_cast<CLUBase*>( pv)->chNumOutput;
+            sLV.shLUStateOut = 0;
+            for (long lii = 0; lii < sLV.chLUNumOut;lii++)
+                sLV.shLUStateOut |= static_cast<char*>((static_cast<CLUBase*>( pv)->pOut))[lii] << lii;
+            
+        }
+        pv = LUSelectorRV(i);
+        if( l == 0 ){//
+            lIdxCounter++;
+            P.pLOrderCalcNum ++;//
+        }
+        else{
+            sLV.shLUStateOutChk = 0;
+            //Fix State    //Read Out        
+            for (long lii = 0; lii < sLV.chLUNumOut;lii++)
+                sLV.shLUStateOutChk |= static_cast<char*>((static_cast<CLUBase*>( pv)->pOut))[lii] << lii;
+            if(sLV.shLUStateOutChk != sLV.shLUStateOut){
+                sLV.sh_counter_same_link_el_chahge++;
+            }   
+            if((lIdxCounter >= lAmtProcessObj-1) || (l != P.pShOrderCalcNum[3])){// next link May be dangerous code
+
+                    if(sLV.sh_counter_same_link_el_chahge!=0){//..sLV.shLUStateOutChk != sLV.shLUStateOut){
+                        //Check State
+                        if(sLV.shMarkerIteration != l){//CYCLESTART
+                            sLV.shCounterLocalIteration = 1;
+                            sLV.shMarkerIteration = l;//?lIdxCounter = l - 1;//Convert link to Index//return to start link Elem
+                            sLV.sh_counter_same_link_el_chahge = 0;//Defacto Restarting cycle
+                        }
+                        else{
+                            sLV.shCounterLocalIteration++;
+                            sLV.sh_counter_same_link_el_chahge = 0;//Defacto Restarting cycle
+                            if(sLV.shCounterLocalIteration  > MAX_AMOUNT_LINK_ITERATION){
+                                while(1);//!Fix Fault @In Dbg Ver Program only
+                                //Later insert in program Error
+                                //Fix Schematic Error
+                                //return;//! In full Ver
+                            }
+                        }
+                        lIdxCounter = l - 1;
+                        P.pLOrderCalcNum = (static_cast<long*>(pExecSeq))+lIdxCounter;
+                    }
+                    else{//Defacto Logger.info("Cycle passed");
+                        sLV.shCounterLocalIteration = 0;
+                        sLV.shMarkerIteration = 0;
+                        lIdxCounter ++;//?= sLV.lIdx_link_same;//Find Last?
+                        P.pLOrderCalcNum = (static_cast<long*>(pExecSeq))+lIdxCounter;
+                        sLV.sh_counter_same_link_el_chahge = 0;
+                    }
+            }
+            else{
+                lIdxCounter ++;//sLV.shLocalIdxCounter
+                P.pLOrderCalcNum = (static_cast<long*>(pExecSeq))+lIdxCounter;
+            }
+        }
+    } while (lIdxCounter < lAmtProcessObj );
+}
+
 
 //""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 //``````````````````````````````````````````````````````````````````````````````````
 //==================================================================================
-//--- 			 Optimized function for CPP Schematic     -----------
+//---            Optimized function for CPP Schematic     -----------
 //==================================================================================
 //..................................................................................
 //""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

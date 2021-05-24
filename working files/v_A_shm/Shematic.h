@@ -5,6 +5,8 @@
 #define TOTAL_POINTS (NUM_IN_POINTS+NUM_OUT_POINTS)
 #define TOTAL_SHEMATIC_MEM 0
 
+#define MAX_AMOUNT_LINK_ITERATION 7
+
 //GetHashId by Index LU in Setting Mem
 void GetHIDLU(void*pv,long lIdxLUinStng );
 
@@ -103,6 +105,7 @@ class Shematic
     short shIdxSumNTUPlusNLANSeq;
     short shIdxSum8ElemSeq;
     short shSizeExecSeq;short shAmountExecSeqElem;
+    short shAmountPossibleIteration;//shAmountFeedbackNumbers
 
 public:
     Shematic(void);
@@ -110,6 +113,7 @@ public:
     void DoCalc(void);
     void DoCalcStatInfo(void);
     void DoCalcLU_V01(void);
+    void DoCalcLU_V02(void);
     void DoCalcLU(void);
     void DoCalcLUSources(void);
     void DoCalcLUSourcesStatInfo(void);
@@ -164,11 +168,11 @@ public:
     void SetupCLUInternalRef2(void *pv);
     void SetupCLUInternalRefLed(void *pv);
     long FillArr_n_linkVal(void );
-	friend long InitSchematic(void);
-	friend long ReInitSchematic(void);
-	friend void DoCalcWrp(void);
-	friend void DoCalcStatInfoWrp(void);
-	friend void GetLssMuteAlarmBlockAddr(void* pv);
+    friend long InitSchematic(void);
+    friend long ReInitSchematic(void);
+    friend void DoCalcWrp(void);
+    friend void DoCalcStatInfoWrp(void);
+    friend void GetLssMuteAlarmBlockAddr(void* pv);
     friend void GetLUTestLedInDataAddr(void* pv);
 };
 
@@ -193,7 +197,7 @@ typedef struct tag_LUInputDsc {
 //Use (disjoint types)
 typedef struct LUInInfo_Tag{
     union{
-	    
+        
         struct{
             //long  OrdNumStng :14;
             //long  shIdLUStng : 9;
@@ -230,7 +234,7 @@ typedef struct SBitFld_LUInInfo_tag{
 typedef struct tag_LUCrossRefDsc {
     short shBaseIdLUStng;
     short shBaseOrdNumStng;
-    //	char  shBaseOrdNumIn ;//For more free Defining
+    //  char  shBaseOrdNumIn ;//For more free Defining
     short shRefIdLUStng;   // Type LU Described in settings
     short shRefOrdNumStng; // Order Num LU Described in settings
     char  chRefOrdNumOut;  // this LU Out Order Num
@@ -263,31 +267,31 @@ typedef struct tag_LUAreaListElem {
 }LUAreaListElem;
 /*
 typedef struct tag_LULinksInfo{
-	char shIdLU;  //Type LU enum ID_LU
-	char chRes;
-	short shRes;
-	LUOutDsc[] arLUOutDsc
-	
+    char shIdLU;  //Type LU enum ID_LU
+    char chRes;
+    short shRes;
+    LUOutDsc[] arLUOutDsc
+    
 }LULinksInfo;
 */
 typedef struct tag_AllocInfo{
-	short shBF; // Bit Flags Fld 0-Need Move
+    short shBF; // Bit Flags Fld 0-Need Move
     short shSize; //In bytes
     void* pvSrc; //Pointer on Area obj in Memory
     void* pvDsc; //Pointer on Area obj in Alloc Memory
-	
+    
 }AllocInfo;
 
 #define SIZE_LU_AREA_LIST_ITEM sizeof(LUAreaListElem)
 /*
 typedef union {
-	char   chArRamPrgEvt [SIZE_MEM_BLK];
-	long    lArRamPrgEvt [SIZE_MEM_BLK>>2];
-	struct	{
-		//LUAreaListElem area
-		//free mem
-		//LU data starting from the end of UNN_LU_AreaMap
-	}
+    char   chArRamPrgEvt [SIZE_MEM_BLK];
+    long    lArRamPrgEvt [SIZE_MEM_BLK>>2];
+    struct  {
+        //LUAreaListElem area
+        //free mem
+        //LU data starting from the end of UNN_LU_AreaMap
+    }
 }UNN_LU_AreaMap;
 */
 #define SIZE_MEM_BLK (1024*32)
