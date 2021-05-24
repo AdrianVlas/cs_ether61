@@ -47,7 +47,6 @@ typedef union{
 
 
 
-
 //friend class CLUBase;
 class CStatInfoStore 
  {
