@@ -19,24 +19,6 @@ enum _start_label
   START_LABEL_NEW_BLOCK
 };
 
-#define SIZE_SENDING_DATA_TM            \
-(                                       \
-  sizeof(measurement) +                 \
-  sizeof(frequency) +                   \
-  sizeof(resistance) +                  \
-  (sizeof(P) >> 1) +                    \
-  (sizeof(Q) >> 1) +                    \
-  (sizeof(S) >> 1) +                    \
-  (sizeof(cos_phi_x1000) >> 1) +        \
-  (sizeof(energy) >> 1) +               \
-  (sizeof(phi_angle) >> 1) +            \
-  sizeof(state_inputs) +                \
-  sizeof(state_outputs) +               \
-  sizeof(state_leds) +                  \
-  sizeof(active_functions) +            \
-  sizeof(diagnostyka)                   \
-)
-
 #define SIZE_RECEIVING_DATA_TM          \
 (                                       \
   sizeof(IEC_active_functions)          \
