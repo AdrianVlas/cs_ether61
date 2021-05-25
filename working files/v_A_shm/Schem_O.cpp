@@ -650,6 +650,12 @@ void* pv;
 
 }
 
+
+#include "const_menu2_diagnostyka.h"
+extern uint32_t *set_diagnostyka;
+
+
+
 void Shematic::DoCalcLU_V02(void){
 register union {
 long* pLOrderCalcNum;
@@ -688,10 +694,12 @@ void* pv;
     do {
         sLV.shTotalIdxCounter++; 
         if(sLV.shTotalIdxCounter >= sLV.shTotalIteration){ 
-            while(1);//!Fix Fault @In Dbg Ver Program only
+            //!Fix Fault @In Dbg Ver Program only while(1);
             //Later insert in program Error
             //Fix Schematic Error
-            //return;//! In full Ver;//Fix Schematic Error
+            set_diagnostyka[(ERROR_SCHEMATIC_BIT)>>5] |= 
+                                static_cast<unsigned int>(1 << ((ERROR_SCHEMATIC_BIT) & 0x1f)); 
+            return;//! In full Ver;//Fix Schematic Error
         }   
          //?sLV.shLocalIdxCounter = lIdxCounter; In this alg not need
          i = P.pShOrderCalcNum[0] - 1;//Num Convert to Index
@@ -730,10 +738,14 @@ void* pv;
                             sLV.shCounterLocalIteration++;
                             sLV.sh_counter_same_link_el_chahge = 0;//Defacto Restarting cycle
                             if(sLV.shCounterLocalIteration  > MAX_AMOUNT_LINK_ITERATION){
-                                while(1);//!Fix Fault @In Dbg Ver Program only
+                                //!Fix Fault @In Dbg Ver Program only while(1);
                                 //Later insert in program Error
                                 //Fix Schematic Error
-                                //return;//! In full Ver
+                                //_SET_BIT(set_diagnostyka,ERROR_SCHEMATIC_BIT );
+                                set_diagnostyka[(ERROR_SCHEMATIC_BIT)>>5] |= 
+                                static_cast<unsigned int>(1 << ((ERROR_SCHEMATIC_BIT) & 0x1f)); 
+             
+                                return;//! In full Ver
                             }
                         }
                         lIdxCounter = l - 1;
