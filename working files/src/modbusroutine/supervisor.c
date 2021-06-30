@@ -1402,6 +1402,20 @@ int superControlParam(int param)
       if(cnt==0)return 1;
       if(cnt>current_config.n_log) return 1;
       break;
+
+    case ID_FB_INPUT_GOOSE_BLOCK:
+      if(cnt==0)return 1;
+      if(cnt>current_config.n_input_GOOSE_block) return 1;
+      break;
+    case ID_FB_INPUT_MMS_BLOCK:
+      if(cnt==0)return 1;
+      if(cnt>current_config.n_input_MMS_block) return 1;
+      break;
+    case ID_FB_NETWORK_OUTPUT_BLOCK:
+      if(cnt==0)return 1;
+      if(cnt>current_config.n_network_output_block) return 1;
+      break;
+
     default:
       return 1;
     }//switch id

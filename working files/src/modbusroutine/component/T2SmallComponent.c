@@ -108,7 +108,8 @@ extern int pointInterface;//метка интерфейса 0-USB 1-RS485
   for(int i=0; i<countRegister; i++) {
    int offset = i+ t2smallcomponent->operativMarker[0]-BEGIN_ADR_REGISTER;
    int param = tempWriteArray[offsetTempWriteArray+i];
-   if(param==0) return 2;//уйти
+   if(param==0) 
+     return 2;//уйти
 //int paramTmp1=0;
 //int paramTmp2=0;
 //if(offset==61440-61440)
