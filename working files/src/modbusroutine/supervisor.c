@@ -1546,6 +1546,23 @@ int superValidParam(uint32_t param)
           n_nodes = 1;
           break;
         }
+
+        case ID_FB_INPUT_GOOSE_BLOCK:
+        {
+          n_nodes = current_config.n_input_GOOSE_block;
+          break;
+        }
+        case ID_FB_INPUT_MMS_BLOCK:
+        {
+          n_nodes = current_config.n_input_MMS_block;
+          break;
+        }
+        case ID_FB_NETWORK_OUTPUT_BLOCK:
+        {
+          n_nodes = current_config.n_network_output_block;
+          break;
+        }
+
         default:
         {
           return 1;
