@@ -55,48 +55,33 @@ int getConfigBigModbusRegister(int adrReg)
    break;
    case 1: //OR
     return current_config.n_or;
-   break;
    case 2: //XOR
     return current_config.n_xor;
-   break;
    case 3: //NOT
     return current_config.n_not;
-   break;
    case 4: //D-trg
     return current_config.n_trigger;
-   break;
    case 5: //GI
     return current_config.n_meander;
-   break;
    case 6: //MFT
     return current_config.n_timer;
-   break;
    case 7: //SZS
     return current_config.n_alarm;
-   break;
    case 8: //ШГС
     return current_config.n_group_alarm;
-   break;
    case 9: //TS
     return current_config.n_ts;
-   break;
    case 10: //TU
     return current_config.n_tu;
-   break;
    case 11: //субмодули журнала
     return current_config.n_log;
-   break;
+
    case 12: //GOOSE in
-    return 0;
-   break;
-   case 13: //GOOSE out
-    return 0;
-   break;
-   case 14: //MMS in
-    return 0;
-   break;
-   case 15: //MMS out
-    return 0;
+    return current_config.n_input_GOOSE_block;
+   case 13: //MMS in
+    return current_config.n_input_MMS_block;
+   case 14: //LAN in
+    return current_config.n_network_output_block;
   }//switch
 
   return 0;
@@ -188,11 +173,17 @@ extern int pointInterface;//метка интерфейса 0-USB 1-RS485
    case 11://субмодули журнала
     current_config_edit.n_log = (tempWriteArray[offsetTempWriteArray+i]);
    break; 
+
    case 12: //GOOSE in
-   case 13: //GOOSE out
-   case 14: //MMS in
-   case 15: //MMS out
-   break;
+    current_config_edit.n_input_GOOSE_block= (tempWriteArray[offsetTempWriteArray+i]);
+   break; 
+   case 13: //MMS in
+    current_config_edit.n_input_MMS_block= (tempWriteArray[offsetTempWriteArray+i]);
+   break; 
+   case 14: //LAN in
+    current_config_edit.n_network_output_block= (tempWriteArray[offsetTempWriteArray+i]);
+   break; 
+
  }//switch
   }//for
 
