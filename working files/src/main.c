@@ -316,8 +316,18 @@ inline void periodical_operations(void)
           (_CHECK_SET_BIT(control_i2c_taskes, TASK_READING_SETTINGS_EEPROM_BIT    ) == 0)
          ) 
       {
-        //На даний моммент не іде читання-запис таблиці настройок, тому можна здійснити контроль достовірності
-        control_settings(config_settings_modified);
+        if (
+            (diagnostyka     != NULL) &&
+            (set_diagnostyka != NULL) &&
+            (_CHECK_SET_BIT(    diagnostyka, ERROR_NO_FREE_DYNAMIC_MEMORY_BIT) == 0) &&
+            (_CHECK_SET_BIT(set_diagnostyka, ERROR_NO_FREE_DYNAMIC_MEMORY_BIT) == 0) &&
+            (_CHECK_SET_BIT(    diagnostyka, ERROR_PRT_MEMORY_BIT            ) == 0) &&
+            (_CHECK_SET_BIT(set_diagnostyka, ERROR_PRT_MEMORY_BIT            ) == 0)
+           )
+        {
+          //На даний моммент не іде читання-запис таблиці настройок, тому можна здійснити контроль достовірності
+          control_settings(config_settings_modified);
+        }
 
         //Скидаємо активну задачу самоконтролю таблиці настройок
         periodical_tasks_TEST_SETTINGS = false;
