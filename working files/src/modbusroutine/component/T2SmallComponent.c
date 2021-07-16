@@ -141,6 +141,9 @@ extern int pointInterface;//метка интерфейса 0-USB 1-RS485
 //      break;
     case ID_FB_INPUT:
     {
+      if(n_tmp>NUMBER_INPUTS || link_tmp>NUMBER_INPUTS) return ID_FB_INPUT+20;
+      if(n_tmp<1) return ID_FB_INPUT+20;
+      if(link_tmp<0) return ID_FB_INPUT+20;
       __settings_for_INPUT *INPUT_arr  = (__settings_for_INPUT*)(sca_of_p[ID_FB_INPUT - _ID_FB_FIRST_VAR]);
       __settings_for_INPUT *INPUT_arr1 = (__settings_for_INPUT*)(sca_of_p_edit[ID_FB_INPUT - _ID_FB_FIRST_VAR]);
       INPUT_arr1[N_tmp]._n    = INPUT_arr[N_tmp]._n    = (int32_t)n_tmp;
@@ -148,6 +151,9 @@ extern int pointInterface;//метка интерфейса 0-USB 1-RS485
      } break;
     case ID_FB_OUTPUT:
      {
+      if(n_tmp>NUMBER_OUTPUTS || link_tmp>NUMBER_OUTPUTS) return ID_FB_OUTPUT+20;
+      if(n_tmp<1) return ID_FB_OUTPUT+20;
+      if(link_tmp<0) return ID_FB_OUTPUT+20;
       __settings_for_OUTPUT_LED *OUTPUT_arr  = (__settings_for_OUTPUT_LED*)(sca_of_p[ID_FB_OUTPUT - _ID_FB_FIRST_VAR]);
       __settings_for_OUTPUT_LED *OUTPUT_arr1 = (__settings_for_OUTPUT_LED*)(sca_of_p_edit[ID_FB_OUTPUT - _ID_FB_FIRST_VAR]);
       OUTPUT_arr1[N_tmp]._n    = OUTPUT_arr[N_tmp]._n    = (int32_t)n_tmp;
@@ -155,6 +161,9 @@ extern int pointInterface;//метка интерфейса 0-USB 1-RS485
      } break;
     case ID_FB_LED:
       {
+      if(n_tmp>NUMBER_LEDS || link_tmp>NUMBER_LEDS) return ID_FB_LED+20;
+      if(n_tmp<1) return ID_FB_LED+20;
+      if(link_tmp<0) return ID_FB_LED+20;
        __settings_for_OUTPUT_LED *LED_arr  = (__settings_for_OUTPUT_LED*)(sca_of_p[ID_FB_LED - _ID_FB_FIRST_VAR]);
        __settings_for_OUTPUT_LED *LED_arr1 = (__settings_for_OUTPUT_LED*)(sca_of_p_edit[ID_FB_LED - _ID_FB_FIRST_VAR]);
       LED_arr1[N_tmp]._n    = LED_arr[N_tmp]._n    = (int32_t)n_tmp;
@@ -163,6 +172,9 @@ extern int pointInterface;//метка интерфейса 0-USB 1-RS485
 
     case ID_FB_BUTTON:
       {
+      if(n_tmp>NUMBER_BUTTONS || link_tmp>NUMBER_BUTTONS) return ID_FB_BUTTON+20;
+      if(n_tmp<1) return ID_FB_BUTTON+20;
+      if(link_tmp<0) return ID_FB_BUTTON+20;
        __settings_for_BUTTON *BUTTON_arr  = (__settings_for_BUTTON*)(sca_of_p[ID_FB_BUTTON - _ID_FB_FIRST_VAR]);
        __settings_for_BUTTON *BUTTON_arr1 = (__settings_for_BUTTON*)(sca_of_p_edit[ID_FB_BUTTON - _ID_FB_FIRST_VAR]);
       BUTTON_arr1[N_tmp]._n    = BUTTON_arr[N_tmp]._n    = (int32_t)n_tmp;
@@ -171,6 +183,9 @@ extern int pointInterface;//метка интерфейса 0-USB 1-RS485
 
     case ID_FB_ALARM:
       {
+      if(n_tmp>(int)current_config.n_alarm || link_tmp>(int)current_config.n_alarm) return ID_FB_ALARM+20;
+      if(n_tmp<1) return ID_FB_ALARM+20;
+      if(link_tmp<0) return ID_FB_ALARM+20;
       __settings_for_ALARM *ALARM_arr  = (__settings_for_ALARM*)(sca_of_p[ID_FB_ALARM - _ID_FB_FIRST_VAR]);
       __settings_for_ALARM *ALARM_arr1 = (__settings_for_ALARM*)(sca_of_p_edit[ID_FB_ALARM - _ID_FB_FIRST_VAR]);
       ALARM_arr1[N_tmp]._n    = ALARM_arr[N_tmp]._n    = (int32_t)n_tmp;
@@ -178,6 +193,9 @@ extern int pointInterface;//метка интерфейса 0-USB 1-RS485
       } break;
     case ID_FB_GROUP_ALARM:
      {
+      if(n_tmp>4 || link_tmp>4) return ID_FB_GROUP_ALARM+20;
+      if(n_tmp<1) return ID_FB_GROUP_ALARM+20;
+      if(link_tmp<0) return ID_FB_GROUP_ALARM+20;
       __settings_for_GROUP_ALARM *GROUP_ALARM_arr  = (__settings_for_GROUP_ALARM*)(sca_of_p[ID_FB_GROUP_ALARM - _ID_FB_FIRST_VAR]);
       __settings_for_GROUP_ALARM *GROUP_ALARM_arr1 = (__settings_for_GROUP_ALARM*)(sca_of_p_edit[ID_FB_GROUP_ALARM - _ID_FB_FIRST_VAR]);
       GROUP_ALARM_arr1[N_tmp]._n    = GROUP_ALARM_arr[N_tmp]._n    = (int32_t)n_tmp;
@@ -185,6 +203,9 @@ extern int pointInterface;//метка интерфейса 0-USB 1-RS485
      } break;
     case ID_FB_AND:
      {
+      if(n_tmp>(int)current_config.n_and || link_tmp>(int)current_config.n_and) return ID_FB_AND+20;
+      if(n_tmp<1) return ID_FB_AND+20;
+      if(link_tmp<0) return ID_FB_AND+20;
       __settings_for_AND *AND_arr = (__settings_for_AND*)(sca_of_p[ID_FB_AND - _ID_FB_FIRST_VAR]);
       __settings_for_AND *AND_arr1 = (__settings_for_AND*)(sca_of_p_edit[ID_FB_AND - _ID_FB_FIRST_VAR]);
       AND_arr1[N_tmp]._n    = AND_arr[N_tmp]._n    = (int32_t)n_tmp;
@@ -192,6 +213,9 @@ extern int pointInterface;//метка интерфейса 0-USB 1-RS485
      } break;
     case ID_FB_OR:
      {
+      if(n_tmp>(int)current_config.n_or || link_tmp>(int)current_config.n_or) return ID_FB_OR+20;
+      if(n_tmp<1) return ID_FB_OR+20;
+      if(link_tmp<0) return ID_FB_OR+20;
       __settings_for_OR *OR_arr  = (__settings_for_OR*)(sca_of_p[ID_FB_OR - _ID_FB_FIRST_VAR]);
       __settings_for_OR *OR_arr1 = (__settings_for_OR*)(sca_of_p_edit[ID_FB_OR - _ID_FB_FIRST_VAR]);
       OR_arr1[N_tmp]._n    = OR_arr[N_tmp]._n    = (int32_t)n_tmp;
@@ -199,6 +223,9 @@ extern int pointInterface;//метка интерфейса 0-USB 1-RS485
      } break;
     case ID_FB_XOR:
      {
+      if(n_tmp>(int)current_config.n_xor || link_tmp>(int)current_config.n_xor) return ID_FB_XOR+20;
+      if(n_tmp<1) return ID_FB_XOR+20;
+      if(link_tmp<0) return ID_FB_XOR+20;
       __settings_for_XOR *XOR_arr  = (__settings_for_XOR*)(sca_of_p[ID_FB_XOR - _ID_FB_FIRST_VAR]);
       __settings_for_XOR *XOR_arr1 = (__settings_for_XOR*)(sca_of_p_edit[ID_FB_XOR - _ID_FB_FIRST_VAR]);
       XOR_arr1[N_tmp]._n    = XOR_arr[N_tmp]._n    = (int32_t)n_tmp;
@@ -206,6 +233,9 @@ extern int pointInterface;//метка интерфейса 0-USB 1-RS485
      } break;
     case ID_FB_NOT:
      {
+      if(n_tmp>(int)current_config.n_not || link_tmp>(int)current_config.n_not) return ID_FB_NOT+20;
+      if(n_tmp<1) return ID_FB_NOT+20;
+      if(link_tmp<0) return ID_FB_NOT+20;
      __settings_for_NOT *NOT_arr  = (__settings_for_NOT*)(sca_of_p[ID_FB_NOT - _ID_FB_FIRST_VAR]);
      __settings_for_NOT *NOT_arr1 = (__settings_for_NOT*)(sca_of_p_edit[ID_FB_NOT - _ID_FB_FIRST_VAR]);
       NOT_arr1[N_tmp]._n    = NOT_arr[N_tmp]._n    = (int32_t)n_tmp;
@@ -214,6 +244,9 @@ extern int pointInterface;//метка интерфейса 0-USB 1-RS485
 
     case ID_FB_TIMER:
      {
+      if(n_tmp>(int)current_config.n_timer || link_tmp>(int)current_config.n_timer) return ID_FB_TIMER+20;
+      if(n_tmp<1) return ID_FB_TIMER+20;
+      if(link_tmp<0) return ID_FB_TIMER+20;
       __settings_for_TIMER *TIMER_arr  = (__settings_for_TIMER*)(sca_of_p[ID_FB_TIMER - _ID_FB_FIRST_VAR]);
       __settings_for_TIMER *TIMER_arr1 = (__settings_for_TIMER*)(sca_of_p_edit[ID_FB_TIMER - _ID_FB_FIRST_VAR]);
       TIMER_arr1[N_tmp]._n    = TIMER_arr[N_tmp]._n    = (int32_t)n_tmp;
@@ -221,6 +254,9 @@ extern int pointInterface;//метка интерфейса 0-USB 1-RS485
      } break;
     case ID_FB_TRIGGER:
      {
+      if(n_tmp>(int)current_config.n_trigger || link_tmp>(int)current_config.n_trigger) return ID_FB_TRIGGER+20;
+      if(n_tmp<1) return ID_FB_TRIGGER+20;
+      if(link_tmp<0) return ID_FB_TRIGGER+20;
       __settings_for_TRIGGER *TRIGGER_arr  = (__settings_for_TRIGGER*)(sca_of_p[ID_FB_TRIGGER - _ID_FB_FIRST_VAR]);
       __settings_for_TRIGGER *TRIGGER_arr1 = (__settings_for_TRIGGER*)(sca_of_p_edit[ID_FB_TRIGGER - _ID_FB_FIRST_VAR]);
       TRIGGER_arr1[N_tmp]._n    = TRIGGER_arr[N_tmp]._n    = (int32_t)n_tmp;
@@ -229,6 +265,9 @@ extern int pointInterface;//метка интерфейса 0-USB 1-RS485
 
     case ID_FB_MEANDER:
      {
+      if(n_tmp>(int)current_config.n_meander || link_tmp>(int)current_config.n_meander) return ID_FB_MEANDER+20;
+      if(n_tmp<1) return ID_FB_MEANDER+20;
+      if(link_tmp<0) return ID_FB_MEANDER+20;
       __settings_for_MEANDER *MEANDER_arr  = (__settings_for_MEANDER*)(sca_of_p[ID_FB_MEANDER - _ID_FB_FIRST_VAR]);
       __settings_for_MEANDER *MEANDER_arr1 = (__settings_for_MEANDER*)(sca_of_p_edit[ID_FB_MEANDER - _ID_FB_FIRST_VAR]);
       MEANDER_arr1[N_tmp]._n    = MEANDER_arr[N_tmp]._n    = (int32_t)n_tmp;
@@ -236,6 +275,9 @@ extern int pointInterface;//метка интерфейса 0-USB 1-RS485
      } break;
     case ID_FB_TU:
      {
+      if(n_tmp>(int)current_config.n_tu || link_tmp>(int)current_config.n_tu) return ID_FB_TU+20;
+      if(n_tmp<1) return ID_FB_TU+20;
+      if(link_tmp<0) return ID_FB_TU+20;
       __settings_for_TU *TU_arr  = (__settings_for_TU*)(sca_of_p[ID_FB_TU - _ID_FB_FIRST_VAR]);
       __settings_for_TU *TU_arr1 = (__settings_for_TU*)(sca_of_p_edit[ID_FB_TU - _ID_FB_FIRST_VAR]);
       TU_arr1[N_tmp]._n    = TU_arr[N_tmp]._n    = (int32_t)n_tmp;
@@ -243,6 +285,9 @@ extern int pointInterface;//метка интерфейса 0-USB 1-RS485
      } break;
     case ID_FB_TS:
      {
+      if(n_tmp>(int)current_config.n_ts || link_tmp>(int)current_config.n_ts) return ID_FB_TS+20;
+      if(n_tmp<1) return ID_FB_TS+20;
+      if(link_tmp<0) return ID_FB_TS+20;
       __settings_for_TS *TS_arr  = (__settings_for_TS*)(sca_of_p[ID_FB_TS - _ID_FB_FIRST_VAR]);
       __settings_for_TS *TS_arr1 = (__settings_for_TS*)(sca_of_p_edit[ID_FB_TS - _ID_FB_FIRST_VAR]);
       TS_arr1[N_tmp]._n    = TS_arr[N_tmp]._n    = (int32_t)n_tmp;
@@ -254,6 +299,10 @@ extern int pointInterface;//метка интерфейса 0-USB 1-RS485
 //        ID_FB_NETWORK_OUTPUT_BLOCK,                                     /*19*/
     case ID_FB_INPUT_GOOSE_BLOCK:
      {
+      if(n_tmp>(int)current_config.n_input_GOOSE_block || link_tmp>(int)current_config.n_input_GOOSE_block) return ID_FB_INPUT_GOOSE_BLOCK+20;
+      if(n_tmp<1) return ID_FB_INPUT_GOOSE_BLOCK+20;
+      if(n_tmp<1) return ID_FB_INPUT_GOOSE_BLOCK+20;
+      if(link_tmp<0) return ID_FB_INPUT_GOOSE_BLOCK+20;
       __settings_for_INPUT_GOOSE_BLOCK *GOOSE_arr  = (__settings_for_INPUT_GOOSE_BLOCK*)(sca_of_p[ID_FB_INPUT_GOOSE_BLOCK - _ID_FB_FIRST_VAR]);
       __settings_for_INPUT_GOOSE_BLOCK *GOOSE_arr1 = (__settings_for_INPUT_GOOSE_BLOCK*)(sca_of_p_edit[ID_FB_INPUT_GOOSE_BLOCK - _ID_FB_FIRST_VAR]);
       GOOSE_arr1[N_tmp]._n    = GOOSE_arr[N_tmp]._n    = (int32_t)n_tmp;
@@ -261,6 +310,9 @@ extern int pointInterface;//метка интерфейса 0-USB 1-RS485
      } break;
     case ID_FB_INPUT_MMS_BLOCK:
      {
+      if(n_tmp>(int)current_config.n_input_MMS_block || link_tmp>(int)current_config.n_input_MMS_block) return ID_FB_INPUT_MMS_BLOCK+20;
+      if(n_tmp<1) return ID_FB_INPUT_MMS_BLOCK+20;
+      if(link_tmp<0) return ID_FB_INPUT_MMS_BLOCK+20;
       __settings_for_INPUT_MMS_BLOCK *MMS_arr  = (__settings_for_INPUT_MMS_BLOCK*)(sca_of_p[ID_FB_INPUT_MMS_BLOCK - _ID_FB_FIRST_VAR]);
       __settings_for_INPUT_MMS_BLOCK *MMS_arr1 = (__settings_for_INPUT_MMS_BLOCK*)(sca_of_p_edit[ID_FB_INPUT_MMS_BLOCK - _ID_FB_FIRST_VAR]);
       MMS_arr1[N_tmp]._n    = MMS_arr[N_tmp]._n    = (int32_t)n_tmp;
@@ -268,6 +320,9 @@ extern int pointInterface;//метка интерфейса 0-USB 1-RS485
      } break;
     case ID_FB_NETWORK_OUTPUT_BLOCK:
      {
+      if(n_tmp>(int)current_config.n_network_output_block || link_tmp>(int)current_config.n_network_output_block) return ID_FB_NETWORK_OUTPUT_BLOCK+20;
+      if(n_tmp<1) return ID_FB_NETWORK_OUTPUT_BLOCK+20;
+      if(link_tmp<0) return ID_FB_NETWORK_OUTPUT_BLOCK+20;
       __settings_for_NETWORK_OUTPUT_BLOCK *NETWORK_arr  = (__settings_for_NETWORK_OUTPUT_BLOCK*)(sca_of_p[ID_FB_NETWORK_OUTPUT_BLOCK - _ID_FB_FIRST_VAR]);
       __settings_for_NETWORK_OUTPUT_BLOCK *NETWORK_arr1 = (__settings_for_NETWORK_OUTPUT_BLOCK*)(sca_of_p_edit[ID_FB_NETWORK_OUTPUT_BLOCK - _ID_FB_FIRST_VAR]);
       NETWORK_arr1[N_tmp]._n    = NETWORK_arr[N_tmp]._n    = (int32_t)n_tmp;

@@ -1014,8 +1014,11 @@ int superPostWriteAction(void)
   int i=0;
   for(; i<TOTAL_COMPONENT; i++)
     {
-      switch(config_array[i].postWriteAction())//invalid param
+      unsigned short value = config_array[i].postWriteAction();
+      switch(value)//invalid param
       {
+        case 0:
+        break;
         case 2:
         return Error_modbus(inputPacket[0], // address,
                             inputPacket[1],//function,
@@ -1025,6 +1028,11 @@ int superPostWriteAction(void)
         return Error_modbus(inputPacket[0], // address,
                             inputPacket[1],//function,
                             ERROR_SLAVE_DEVICE_BUSY,//error,
+                            outputPacket);//output_data
+        default:
+        return Error_modbus(inputPacket[0], // address,
+                            inputPacket[1],//function,
+                            value,//error,
                             outputPacket);//output_data
       }//switch
     }//for
