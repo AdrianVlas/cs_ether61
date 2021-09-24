@@ -168,7 +168,7 @@ long CMft::TDelayMftDir(long lResetKey, long lInKey) {
             lVl = m_MftSuit.lTdelay;
             if(m_chStateTdelay == 0 && lVl == 0)
                 return 1;
-            *plTmrVal = lInKey = lVl
+            *plTmrVal = lInKey = lVl;
             if (*plTmrVal != lInKey)
                 *plTmrVal = lInKey; //
             m_chStateTdelay = 1;//Activated

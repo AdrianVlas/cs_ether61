@@ -20,4 +20,23 @@ Merge made by the 'recursive' strategy.
  working files/inc/strings_global.h | 4 ++--
  working files/src/mo.c             | 1 +
  2 files changed, 3 insertions(+), 2 deletions(-)
+ cd /d/G_Copy/emb_pj/CS_Demo/demo3/cs_IEC61850
+ git@github.com:AdrianVlas/cs_ether61
+ git push --repo git@github.com:AdrianVlas/cs_ether61.git Synchro(IEC-61850)
+ ???
+  git push --repo git@github.com:AdrianVlas/cs_ether61.git
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 6 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 707 bytes | 707.00 KiB/s, done.
+Total 5 (delta 4), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (4/4), completed with 4 local objects.
+To github.com:AdrianVlas/cs_ether61.git
+   ca650a9..0c446de  Synchro(IEC-61850) -> Synchro(IEC-61850)
+
+/D/G_Copy/emb_pj/CS_Demo/demo3/cs_IEC61850
+
+ 
+ 
 
