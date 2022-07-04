@@ -4605,7 +4605,8 @@ struct {
         rsLV.P.pLOrderCalcNum++;
            
     }   
-    
+    if(shAmountExecSeqElem == shAmountPossibleIteration) //!PatchЕнциклопедія  site:ewikiuk.top
+        shAmountPossibleIteration++;
     return rsLV.chVal;
 
 }            
