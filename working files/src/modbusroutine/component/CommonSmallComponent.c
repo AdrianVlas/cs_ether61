@@ -280,20 +280,20 @@ int postCommonSmallWriteAction(void)
           if(tempWriteArray[0]==1)
             {
               superConfig_and_settings();//компонентная активация
-              set_config_and_settings(1, USB_PARAMS_FIX_CHANGES);//ЧЕРЕЗ ф-цию 5
+              if(set_config_and_settings(1, USB_PARAMS_FIX_CHANGES)) return 3;//ЧЕРЕЗ ф-цию 5
             }
           if(tempWriteArray[0]==0)
-            set_config_and_settings(0, USB_PARAMS_FIX_CHANGES);//ЧЕРЕЗ ф-цию 5
+            if(set_config_and_settings(0, USB_PARAMS_FIX_CHANGES)) return 3;//ЧЕРЕЗ ф-цию 5
         }//if
       if(pointInterface==1)  //метка интерфейса 0-USB 1-RS485
         {
           if(tempWriteArray[0]==1)
             {
               superConfig_and_settings();//компонентная активация
-              set_config_and_settings(1, RS485_PARAMS_FIX_CHANGES);//ЧЕРЕЗ ф-цию 5
+              if(set_config_and_settings(1, RS485_PARAMS_FIX_CHANGES)) return 3;//ЧЕРЕЗ ф-цию 5
             }//if
           if(tempWriteArray[0]==0)
-            set_config_and_settings(0, RS485_PARAMS_FIX_CHANGES);//ЧЕРЕЗ ф-цию 5
+            if(set_config_and_settings(0, RS485_PARAMS_FIX_CHANGES)) return 3;//ЧЕРЕЗ ф-цию 5
         }//if
     }//case (BEGIN_ADR_REGISTER+1):
     break;
