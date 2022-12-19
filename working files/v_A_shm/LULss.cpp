@@ -689,14 +689,14 @@ arChIntermediaResult[OFFSET_OUT_LSS_OR_28__2_1];//
 register __LN_ALARM *p__LN_ALARM =  static_cast<__LN_ALARM*>(pvCfgLN);
    //volatile bool boolchQTrg29 = chQTrg29,boolchQTrg11 = m_chQTrg11;
     p__LN_ALARM->active_state[(ALARM_OUT_ALARM/8) ] = (static_cast<bool>(i))<<(ALARM_OUT_ALARM%8);
-    p__LN_ALARM->active_state[(ALARM_OUT_MUTE/8) ]  = (static_cast<bool>(j))<<(ALARM_OUT_MUTE%8) ;
+    p__LN_ALARM->active_state[(ALARM_OUT_MUTE/8) ]  |= (static_cast<bool>(j))<<(ALARM_OUT_MUTE%8) ;
     
     if(boolchQTrg29 != static_cast<bool>(m_chQTrg29) ){
     p__LN_ALARM->d_trigger_state[ALARM_D_TRIGGER_1/8] = (static_cast<bool>(m_chQTrg29))<<(ALARM_D_TRIGGER_1%8);
     chGlb_ActivatorWREeprom++;
     }
     if(boolchQTrg11 != static_cast<bool>(m_chQTrg11) ){
-    p__LN_ALARM->d_trigger_state[ALARM_D_TRIGGER_2/8] = (static_cast<bool>(m_chQTrg11))<<(ALARM_D_TRIGGER_2%8);
+    p__LN_ALARM->d_trigger_state[ALARM_D_TRIGGER_2/8] |= (static_cast<bool>(m_chQTrg11))<<(ALARM_D_TRIGGER_2%8);
     chGlb_ActivatorWREeprom++;
     }
     
