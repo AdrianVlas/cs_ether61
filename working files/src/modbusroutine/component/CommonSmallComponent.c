@@ -280,20 +280,44 @@ int postCommonSmallWriteAction(void)
           if(tempWriteArray[0]==1)
             {
               superConfig_and_settings();//компонентная активация
-              if(set_config_and_settings(1, USB_PARAMS_FIX_CHANGES)) return 3;//ЧЕРЕЗ ф-цию 5
+              unsigned int result = set_config_and_settings(1, USB_PARAMS_FIX_CHANGES);//ЧЕРЕЗ ф-цию 5
+              if (result != 0) 
+              {
+                if (result >= 2)current_state_menu2.edition = ED_ERROR;
+                return 3;
+              }
             }
           if(tempWriteArray[0]==0)
-            if(set_config_and_settings(0, USB_PARAMS_FIX_CHANGES)) return 3;//ЧЕРЕЗ ф-цию 5
+          {
+            unsigned int result = set_config_and_settings(0, USB_PARAMS_FIX_CHANGES);//ЧЕРЕЗ ф-цию 5
+            if (result != 0) 
+            {
+              current_state_menu2.edition = ED_ERROR;
+              return 3;
+            }
+          }
         }//if
       if(pointInterface==1)  //метка интерфейса 0-USB 1-RS485
         {
           if(tempWriteArray[0]==1)
             {
               superConfig_and_settings();//компонентная активация
-              if(set_config_and_settings(1, RS485_PARAMS_FIX_CHANGES)) return 3;//ЧЕРЕЗ ф-цию 5
+              unsigned int result = set_config_and_settings(1, RS485_PARAMS_FIX_CHANGES);//ЧЕРЕЗ ф-цию 5
+              if (result != 0) 
+              {
+                if (result >= 2) current_state_menu2.edition = ED_ERROR;
+                return 3;
+              }
             }//if
           if(tempWriteArray[0]==0)
-            if(set_config_and_settings(0, RS485_PARAMS_FIX_CHANGES)) return 3;//ЧЕРЕЗ ф-цию 5
+          {
+            unsigned int result = set_config_and_settings(0, RS485_PARAMS_FIX_CHANGES);//ЧЕРЕЗ ф-цию 5
+            if (result != 0) 
+            {
+              current_state_menu2.edition = ED_ERROR;
+              return 3;
+            }
+          }
         }//if
     }//case (BEGIN_ADR_REGISTER+1):
     break;
