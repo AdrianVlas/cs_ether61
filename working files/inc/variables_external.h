@@ -81,6 +81,7 @@ extern unsigned int new_state_keyboard;
 extern unsigned char time_set_keyboard[NUMBER_KEY_KEYBOARD];
 
 extern uint16_t time_rewrite;
+extern unsigned int reinit_LCD;
 
 //Меню версії 2
 extern __CURRENT_STATE_MENU2 current_state_menu2;
@@ -133,6 +134,9 @@ extern unsigned int config_settings_modified;
 //Масив управлінських структур
 extern __control_struct array_control_struct[NUMBER_ALL_BLOCKS];
 
+//Визначення періодів у хвилину і більше
+extern unsigned int number_seconds;
+
 //Змінні для визначеня ресурсу процесора-програми
 extern unsigned int restart_resurs_count;
 extern unsigned int resurs_temp;
@@ -153,7 +157,7 @@ extern unsigned int time_delta_watchdog_output;
 extern unsigned int time_delta_watchdog_output_min;
 extern unsigned int time_delta_watchdog_output_max;
 
-extern short int word_SRAM1;
+extern short int volatile word_SRAM1;
 
 extern unsigned char Temporaty_I2C_Buffer[SIZE_PAGE_EEPROM + 2];
 extern uint16_t number_busy_state;
