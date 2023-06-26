@@ -81,6 +81,8 @@ extern unsigned int wait_lcd_ready(void);
 extern unsigned int clear_lcd(void);
 extern unsigned int mode_viewing(unsigned int, unsigned int, unsigned int);
 extern unsigned int hd44780_puts(unsigned char *, unsigned int);
+extern unsigned int hd44780_test(unsigned char *, unsigned int);
+extern unsigned int read_data_from_lcd(unsigned char*);
 extern unsigned int Win1251toHd44780 (unsigned int);
 extern unsigned int write_data_to_lcd(unsigned char);
 extern unsigned int write_command_to_lcd(unsigned char);
@@ -221,7 +223,7 @@ extern void make_ekran_list_event_pr_err(void);
 extern void make_ekran_data_reg(void);
 
 extern __result_dym_mem_select allocate_dynamic_memory_for_diagnostyka(__action_dym_mem_select, uint32_t, uint32_t);
-extern __result_dym_mem_select allocate_dynamic_memory_for_settings(__action_dym_mem_select, unsigned int, uintptr_t *[], uintptr_t *[], __CONFIG *, __CONFIG *, __CONFIG *);
+extern __result_dym_mem_select allocate_dynamic_memory_for_settings(__action_dym_mem_select const, unsigned int const, uintptr_t * [], uintptr_t * const[], __CONFIG * const, __CONFIG * const, __CONFIG * const);
 extern __result_dym_mem_select action_after_changing_of_configuration(void);
 extern void calculate_namber_bit_waiting_for_rs_485(void);
 extern void restore_trigger_functions(unsigned int*);

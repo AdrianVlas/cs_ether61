@@ -107,6 +107,7 @@ unsigned int new_state_keyboard = 0;
 SRAM1 unsigned char time_set_keyboard[NUMBER_KEY_KEYBOARD];
 
 SRAM1 uint16_t time_rewrite/* = 0*/; //Час який пройшов після останнього обновлення
+unsigned int reinit_LCD;
 
 //Меню версії 2
 SRAM1 __CURRENT_STATE_MENU2 current_state_menu2;
@@ -255,6 +256,9 @@ unsigned int config_settings_modified = 0;
 //Масив управлінських структур
 __control_struct array_control_struct[NUMBER_ALL_BLOCKS];
 
+//Визначення періодів у хвилину і більше
+unsigned int number_seconds;
+
 //Ресурс++
 unsigned int restart_resurs_count = 0;
 unsigned int resurs_temp = 0;
@@ -275,7 +279,7 @@ unsigned int time_delta_watchdog_output = 0;
 unsigned int time_delta_watchdog_output_min = 0xffff*10;
 unsigned int time_delta_watchdog_output_max = 0;
 
-SRAM1 short int word_SRAM1;
+SRAM1 short int volatile word_SRAM1;
 
 //I2C
 SRAM1 unsigned char Temporaty_I2C_Buffer[SIZE_PAGE_EEPROM + 2];

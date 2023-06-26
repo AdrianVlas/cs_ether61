@@ -726,6 +726,15 @@ void TIM4_IRQHandler(void)
       
       number_inputs_for_fix_one_second = 0;
       
+      if(++number_seconds >= 60)
+      {
+        number_seconds = 0;
+        if((POWER_CTRL->IDR & POWER_CTRL_PIN) != (uint32_t)Bit_RESET)
+        {
+          reinit_LCD = true;
+        }
+      }
+      
       //Робота з таймером очікування нових змін налаштувань
       if (
           (restart_timeout_idle_new_settings != 0) ||
@@ -2011,6 +2020,7 @@ void EXITI_POWER_IRQHandler(void)
 
       //Виставляємо повідомлення про цю подію
       if (clear_diagnostyka != NULL) _SET_BIT(clear_diagnostyka, EVENT_DROP_POWER_BIT);
+      reinit_LCD = true;
     }
     else
     {
