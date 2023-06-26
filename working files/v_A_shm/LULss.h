@@ -19,15 +19,19 @@ public:
 	void CalcLssSchematic(void);
 	void CalcLssSchematicOpt(void);
 	void CalcLssSchematicOpt3(void);
+	void CalcLssSchematicOptManual(void);
+	void CalcLssSchematicOptManual_v1(void);
 	char* arrPchIn[TOTAL_LSS_IN];
 	char  arrOut  [TOTAL_LSS_OUTPUT];//Trash field
 	LssCfgSuit m_LssCfgSuit;
 	TmrNode m_Node1_1Ms;
     TmrNode m_Node1_2Ms;
+    TmrNode m_Node1_3Ms;
     TmrNode m_NodeCs;
 	char m_chLinkedTimers; //Field bit
     char m_chStateT1_1Ms;
     char m_chStateT1_2Ms;
+    char m_chStateT1_3Ms;
     char m_chStateTCs;
 	char m_chQTrg29;
     char m_chQTrg11;
@@ -35,11 +39,19 @@ public:
     char m_chInC29;
     char m_chInC11;
 	char m_chErrorQTrg11;
+	char m_chSkip_counter;
 	short m_shAmountProcessedRec;
     short m_shStartRecord;
+    unsigned long last_state_wrp;
+    unsigned long last_state_1Ms_lTmrVal;
+    unsigned long last_state_1Ms_2TmrVal;
+    unsigned long last_state_3Ms_lTmrVal;
+    unsigned long last_state_Cs_lTmrVal; 
+    
      LedShcemasDscRecord** m_pArLssShcemasDscRecords;//PConst
 	long T1_1Ms(long lActivKey);
 	long T1_2Ms(long lActivKey);
+	long T1_3Ms(long lActivKey);
 	long TCs(long lActivKey);
 //	void inline SetStateTrg(long lIdTrg, void* pvState);
 //	void inline ClrStateTrg(long lIdTrg, void* pvState);
