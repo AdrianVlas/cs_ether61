@@ -53,6 +53,9 @@ long CPulseAlternator::LinkPulseAltTimer(void) {
         i++;
         m_chLinkedTimers |= 2;
     }
+    else{
+        return 0;
+    }
 
     
     chGlSem--;

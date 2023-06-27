@@ -53,9 +53,9 @@ CBGSig::~CBGSig(void) {
 }
 
 CBGSig::CBGSig(char chM,char chI){
-	chMaxIteratoin = chM;
-	chIteration = chI;
-	
+    chMaxIteratoin = chM;
+    chIteration = chI;
+    
 chNumInput  = static_cast<char>(TOTAL_BGS_VISIO_IN);//
 chNumOutput = static_cast<char>(TOTAL_BGS_VISIO_OUT);
 memset(static_cast<void*>(arrPchIn),0xcc,sizeof(char*)*TOTAL_BGS_VISIO_IN);
@@ -393,8 +393,8 @@ memset(static_cast<void*>(arrOut),0,sizeof(char  )*TOTAL_BGS_VISIO_OUT);
         ch_DTrg = 1;
     }
     ch_C1 = i;
-	i = 0;
-	bool bbDeltaItminusIf;
+    i = 0;
+    bool bbDeltaItminusIf;
     if (ch_DTrg == 1) {
         long j, Iti;
         Iti = measurement_DBG[m_chNumberAnalogChanell];
@@ -432,28 +432,28 @@ memset(static_cast<void*>(arrOut),0,sizeof(char  )*TOTAL_BGS_VISIO_OUT);
             //m_lNNC = (m_lIc - m_lKcDeltaIy) / m_lKcDeltaIy;
             //m_lNNP = (m_lIp - m_lKcDeltaIy) / m_lKcDeltaIy;
             m_lNNC = (m_lIc ) / m_lKcDeltaIy;
-			
+            
             m_lNNP = (m_lIp ) / m_lKcDeltaIy;
-			
+            
             //lRamainderNNC   = (m_lIc - m_lKcDeltaIy) % m_lKcDeltaIy;
             lRamainderNNC   = (m_lIc ) % m_lKcDeltaIy;
-			if(lRamainderNNC>0)
-				lRamainderNNC--;
+            if(lRamainderNNC>0)
+                lRamainderNNC--;
             if(lRamainderNNC>=(m_lKcDeltaIy>>1))
                 m_lNNC++;
             //lRamainderNNP  = (m_lIp - m_lKcDeltaIy) % m_lKcDeltaIy;
             lRamainderNNP  = (m_lIp ) % m_lKcDeltaIy;
-			if(lRamainderNNP>0)
-				lRamainderNNP--;
+            if(lRamainderNNP>0)
+                lRamainderNNP--;
             if(lRamainderNNP>=(m_lKcDeltaIy>>1))
                 m_lNNP++;
-			
-			if(m_lNNC>0)
-				m_lNNC--;
-			//else{}
-			if(m_lNNP>0)
-				m_lNNP--;
-			//else{}
+            
+            if(m_lNNC>0)
+                m_lNNC--;
+            //else{}
+            if(m_lNNP>0)
+                m_lNNP--;
+            //else{}
         }
         m_chWRIp = 1;
     }
@@ -570,8 +570,8 @@ memset(static_cast<void*>(arrOut),0,sizeof(char  )*TOTAL_BGS_VISIO_OUT);
         ch_DTrg = 1;
     }
     ch_C1 = i;
-	i = 0;
-	bool bbDeltaItminusIf;
+    i = 0;
+    bool bbDeltaItminusIf;
     if (ch_DTrg == 1) {
         long j, Iti;
         Iti = measurement[m_chNumberAnalogChanell];
@@ -608,17 +608,17 @@ memset(static_cast<void*>(arrOut),0,sizeof(char  )*TOTAL_BGS_VISIO_OUT);
             m_lNNP++;                                  //    m_lNNP++;
         
         if (m_BGSigSuit.chCheckBgs > 0) {
-			if(m_lNNC>0)
-				m_lNNC--;
-			//else{}
-			if(m_lNNP>0)
-				m_lNNP--;
+            if(m_lNNC>0)
+                m_lNNC--;
+            //else{}
+            if(m_lNNP>0)
+                m_lNNP--;
             
             
         }  
 
         m_chWRIp = 1;
-	
+    
     }
     else {
         if (bbTDelay == false)
@@ -733,9 +733,9 @@ long CBGSig::EvalDeltaIbusDbg(void) {
     //Kc = Ucurr_power/Unom_power
     //Num Analog Chanel
     Iti = measurement_DBG[m_chNumberAnalogChanell];
-	if((chBkpt != 0) && (m_chNumberAnalogChanell==1))asm volatile(
-	            "bkpt 1"
-	            );
+    if((chBkpt != 0) && (m_chNumberAnalogChanell==1))asm volatile(
+                "bkpt 1"
+                );
 //    Iti = measurement_DBG[m_chNumberAnalogChanell];
     if (Iti > m_lMeasIti_mn_1) {
         j = Iti - m_lMeasIti_mn_1;
@@ -791,9 +791,9 @@ long CBGSig::EvalDeltaIbus(void) {
     //Kc = Ucurr_power/Unom_power
     //Num Analog Chanel
     Iti = measurement[m_chNumberAnalogChanell];
-	if((chBkpt != 0) && (m_chNumberAnalogChanell==1))asm volatile(
-	            "bkpt 1"
-	            );
+    if((chBkpt != 0) && (m_chNumberAnalogChanell==1))asm volatile(
+                "bkpt 1"
+                );
 //    Iti = measurement[m_chNumberAnalogChanell];
     if (Iti > m_lMeasIti_mn_1) {
         j = Iti - m_lMeasIti_mn_1;
@@ -853,9 +853,9 @@ long CBGSig::EvalDeltaIbusDbg(void*pv) {
     //Num Analog Chanel
 //    Iti = measurement_DBG[m_chNumberAnalogChanell];
     Iti = *(static_cast<long*>(pv)+m_chNumberAnalogChanell);
-	if((chBkpt != 0) && (m_chNumberAnalogChanell==1))asm volatile(
-	            "bkpt 1"
-	            );
+    if((chBkpt != 0) && (m_chNumberAnalogChanell==1))asm volatile(
+                "bkpt 1"
+                );
 //    Iti = measurement_DBG[m_chNumberAnalogChanell];
     if (Iti > m_lMeasIti_mn_1) {
         j = Iti - m_lMeasIti_mn_1;
@@ -922,9 +922,9 @@ long CBGSig::EvalDeltaIbus(void *pv) {
     else i--;     
     Ii = *(static_cast<long*>(pv)+m_chNumberAnalogChanell+ (i*I_U*1) );
     
-	if((chBkpt != 0) && (m_chNumberAnalogChanell==1))asm volatile(
-	            "bkpt 1"
-	            );
+    if((chBkpt != 0) && (m_chNumberAnalogChanell==1))asm volatile(
+                "bkpt 1"
+                );
 //    Iti = measurement[m_chNumberAnalogChanell];
     if (Ii > Ip) {
         j = Ii - Ip;
@@ -1038,11 +1038,11 @@ void CBGSig::CalcBusGrSigSchematic(void) {
     register unsigned long  rUl_1,rUl_2;
 //    register unsigned long u32_bit_hld1 = 0;  
     union 
-	{
-		unsigned char   uchAr [4];
-		unsigned short  ushAr [2];
+    {
+        unsigned char   uchAr [4];
+        unsigned short  ushAr [2];
         unsigned long   ulVal;
-	}unnBF1;//,unnBF2;
+    }unnBF1;//,unnBF2;
  union { //register
    struct {
       unsigned int  PO_DeltaIbus: 1;
@@ -1075,9 +1075,9 @@ void CBGSig::CalcBusGrSigSchematic(void) {
     unnBF1.ulVal = 0;
     m_Iteration++;
     if((measurement[4] >= l_1D15_UNOM) || (measurement[4] <= l_0D80_UNOM))
-		sLV.U = lU_NOM;
-	else
-		sLV.U = measurement[4];
+        sLV.U = lU_NOM;
+    else
+        sLV.U = measurement[4];
    
     //#pragma data_alignment=4
     //    char arChIntermediaResult[(TOTAL_BGS_LU)];
@@ -1452,10 +1452,10 @@ char chNotImp6ms;//,chIdxGrupSamplesFix
     wrp.lVl = 0;
     unnBF1.ulVal = 0;
     m_Iteration++;
-	if((measurement[4] >= l_1D15_UNOM) || (measurement[4] <= l_0D80_UNOM))
-		sLV.U = lU_NOM;
-	else
-		sLV.U = measurement[4];
+    if((measurement[4] >= l_1D15_UNOM) || (measurement[4] <= l_0D80_UNOM))
+        sLV.U = lU_NOM;
+    else
+        sLV.U = measurement[4];
     ArrBGSigDbgRec[uiIdxArrBGSigDbgRec].luIterLU = m_Iteration;
 //#pragma data_alignment=4 
 //    char arChIntermediaResult[(TOTAL_BGS_LU)];

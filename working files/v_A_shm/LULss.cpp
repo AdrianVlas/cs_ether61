@@ -31,23 +31,26 @@ CLULss::CLULss(char chM,char chI) {
     m_Node1_1Ms.lTmrVal = 0;
     m_Node1_1Ms.next = 0;
     m_Node1_2Ms.lTmrVal = 0;
-    m_Node1_2Ms.next = 0;
+    m_Node1_2Ms.next = 0;;
+    m_Node1_3Ms.lTmrVal = 0;
+    m_Node1_3Ms.next = 0;
     m_NodeCs.lTmrVal = 0;
     m_NodeCs.next = 0;
     m_chLinkedTimers = 0;
     m_chStateT1_1Ms = 0;
     m_chStateT1_2Ms = 0;
+    m_chStateT1_3Ms = 0;
     m_chStateTCs = 0;
-m_chQTrg29 = 0;
-m_chQTrg11 = 0;
-m_chInC29  = 0;
-m_chInC11  = 0;	
-m_chErrorQTrg29 = 0;
-m_chErrorQTrg11 = 0;	
-m_shStartRecord = 0;
-m_shAmountProcessedRec = 0;
-m_pArLssShcemasDscRecords = const_cast< LedShcemasDscRecord** >(
-&arPLssShcemasSimpleModeDscRecords[0]);
+    m_chQTrg29 = 0;
+    m_chQTrg11 = 0;
+    m_chInC29  = 0;
+    m_chInC11  = 0;	
+    m_chErrorQTrg29 = 0;
+    m_chErrorQTrg11 = 0;	
+    m_shStartRecord = 0;
+    m_shAmountProcessedRec = 0;
+    m_pArLssShcemasDscRecords = const_cast< LedShcemasDscRecord** >(
+    &arPLssShcemasSimpleModeDscRecords[0]);
 //const_cast<const LedShcemasDscRecord*>();
 }
 void CLULss::UpdateCLss(void) {
@@ -1356,7 +1359,7 @@ stt_LULss_Not01__1_1.U8V = rU,
         if(m_Node1_3Ms.lTmrVal == last_state_3Ms_lTmrVal)
           eq_counter++;
         
-        if(m_Node1_Cs.lTmrVal == last_state_Cs_lTmrVal) //тут правильніше якщо число не 0 то контролювати перехід в 0 тоді тільки і зміниться стан виходу
+        if(m_NodeCs.lTmrVal == last_state_Cs_lTmrVal) //тут правильніше якщо число не 0 то контролювати перехід в 0 тоді тільки і зміниться стан виходу
           eq_counter++;
         if(wrp.lVl == last_state_wrp)
           eq_counter++;
@@ -1670,7 +1673,7 @@ register __LN_ALARM *p__LN_ALARM =  static_cast<__LN_ALARM*>(pvCfgLN);
  last_state_1Ms_lTmrVal   = m_Node1_1Ms.lTmrVal;
  last_state_1Ms_2TmrVal   = m_Node1_2Ms.lTmrVal;
  last_state_3Ms_lTmrVal   = m_Node1_3Ms.lTmrVal;
- last_state_Cs_lTmrVal    = m_Node1_Cs.lTmrVal ;
+ last_state_Cs_lTmrVal    = m_NodeCs.lTmrVal ;
  m_chSkip_counter = 4;//2,3, internal call befor timer state changed
 
 
@@ -1699,10 +1702,10 @@ char chGBL_BP_StopLss = 0;
 void LssOp	(void *pObj){
 CLULss& rCLULss = *(static_cast<CLULss*>(pObj));
 if(chGBL_BP_StopLss == rCLULss.shShemasOrdNumStng)
-    asm(
+    asm volatile(
                 "bkpt 1"
                 );
-rCLULss.CalcLssSchematicOpt();				
+rCLULss.CalcLssSchematicOpt();
 }
 
 
