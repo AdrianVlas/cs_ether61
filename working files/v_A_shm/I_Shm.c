@@ -162,7 +162,6 @@ while(1){
 //=================================================================================
 __root void save_trg_info_for_Taras_code(void )
 {
-    register I32 i; 
 //Триґерна інформація
     if (periodical_tasks_TEST_TRG_FUNC != 0)
     {
