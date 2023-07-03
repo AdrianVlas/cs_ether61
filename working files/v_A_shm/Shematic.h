@@ -304,5 +304,5 @@ extern  const short arrShCalcLUOrderNumsSchmPage2[];
 extern  const char  arrChCalcLUOrderNumsSchmPage2[];
 extern  char chErrorState;
 
-
+extern "C" void save_trg_info_for_Taras_code(void );
 

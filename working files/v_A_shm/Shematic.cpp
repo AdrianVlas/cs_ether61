@@ -4633,6 +4633,7 @@ j = sh.EvalIdxinarrLUAreaListElem(static_cast<long>(locSBitFld.bfInfo_IdLUStng))
 //==================================================================================
 //--- 			 Interface function for CPP Schematic     -----------
 //==================================================================================
+//extern "C" void save_trg_info_for_Taras_code(void );
 //..................................................................................
 //""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 long InitSchematic(void){
@@ -4644,7 +4645,8 @@ return sh.Init();;
 }
 
 void DoCalcWrp(void){
-
+  save_trg_info_for_Taras_code();
+  
 sh.DoCalc();
 //sh.DoCalcLUSources();
     UpdateOutDiagn();

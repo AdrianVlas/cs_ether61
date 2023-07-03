@@ -88,6 +88,8 @@ possible calls main_manu_function_ver2 : move_into_main, make_ekran_main, press_
 
 //Андрія функції
 //function ChangeCfg :  16;
+possible calls save_trg_info_for_Taras_code: ;
+
 possible calls ChangeCfg: ;
 possible calls "Shematic::Init2()": "FBWrp_Op(void*)";
 possible calls "Shematic::SetupCLUAnd_8_1StngParam(void *)"    : "AND_Op_8_1(void *)";
