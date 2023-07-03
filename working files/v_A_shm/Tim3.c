@@ -74,8 +74,8 @@ void TIM3_NVIC_Init(void)
 {
     NVIC_InitTypeDef NVIC_InitStructure;
     NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn; /*TIM3 interrupt*/
-    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0; /*Preemptive priority level 0*/
-    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3; /*From the priority level 3*/
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 3; /*Preemptive priority level 0*/
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0; /*From the priority level 3*/
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; /*The IRQ channel is enabled*/
     NVIC_Init(&NVIC_InitStructure);
 }
