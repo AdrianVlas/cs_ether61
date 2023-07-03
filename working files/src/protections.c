@@ -876,7 +876,7 @@ void TIM2_IRQHandler(void)
            ) 
         {
           //На даний моммент не іде читання-запис триґерної інформації, тому можна здійснити копіювання
-          TestFlag = 0xff;
+//          TestFlag = 0xff;
           for (__id_fb block_tmp = _ID_FB_FIRST_ALL; block_tmp < _ID_FB_LAST_ALL; block_tmp++)
           {
             switch (block_tmp)
@@ -921,7 +921,7 @@ void TIM2_IRQHandler(void)
             }
           }
           crc_trg_func_ctrl = crc_trg_func;
-          TestFlag = 0x0;
+//          TestFlag = 0x0;
 
           //Скидаємо активну задачу формування резервної копії 
           periodical_tasks_TEST_TRG_FUNC = false;

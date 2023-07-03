@@ -550,7 +550,7 @@ extern unsigned int __ICFEDIT_region_RAM1_size__;
 
 #endif
 
-volatile unsigned int TestFlag = 0;
+//volatile unsigned int TestFlag = 0;
 
 
 #endif
