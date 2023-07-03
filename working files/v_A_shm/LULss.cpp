@@ -1677,10 +1677,10 @@ stt_LULss_Not01__1_1.U8V = rU,
     lV = stt_LULss_Or_25__2_1.bool_val.bt7;
     rU = stt_LULss_Or_26__2_1.bool_val.bt7; 
    
-    if( lV == 1 && rU == 1)
-        asm(
-       "bkpt 1"
-        );
+//    if( lV == 1 && rU == 1)
+//        asm(
+//       "bkpt 1"
+//        );
 
    
 
