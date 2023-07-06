@@ -1,0 +1,17 @@
+Variable	Value	Location	Type	
+this	sh (0x20011F24)	R4	class Shematic *	
+chInitTerminated	'\0' (0x00)	0x20011F24	char	
+pLUAreaList	gLUAreaMem (0x200003B0)	0x20011F28	void *	
+p_current_config_prt	current_config_prt (0x20011E1C)	0x20011F2C	void *	
+pCFixBlockWrp	0x2000112C (gLUAreaMem + 3452)	0x20011F30	void *	
+pExecSeq	0x20000F1C (gLUAreaMem + 2924)	0x20011F34	void *	
+arIdxLUAreaListElem	<array>	0x20011F38	short[26]	
+chMaxIteratoin	'ß' (0xDF)	0x20011F6C	char	
+chIteration	'.' (0x05)	0x20011F6D	char	
+chSumNLedPlusNOut	'.' (0x1D)	0x20011F6E	char	
+chSumNTUPlusNLAN	'.' (0x0E)	0x20011F6F	char	
+shSum8Elem	194	0x20011F70	short	
+shIdxSumNLedPlusNOutSeq	0	0x20011F72	short	
+shIdxSumNTUPlusNLANSeq	249	0x20011F74	short	
+shIdxSum8ElemSeq	53	0x20011F76	short	
+lRes	0	R9	long	
