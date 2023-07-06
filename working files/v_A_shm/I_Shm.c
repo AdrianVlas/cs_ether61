@@ -166,7 +166,23 @@ __root void save_trg_info_for_Taras_code(void )
     if (periodical_tasks_TEST_TRG_FUNC != 0)
     {
       //Стоїть у черзі активна задача зроботи резервні копії даних
-      if ((state_i2c_task & MASKA_FOR_BIT(STATE_TRG_FUNC_EEPROM_GOOD_BIT)) != 0)
+      if (
+          ((state_i2c_task & MASKA_FOR_BIT(STATE_TRG_FUNC_EEPROM_GOOD_BIT)) != 0) &&
+          (
+           !(
+             (diagnostyka != NULL) &&
+             (
+              (_CHECK_SET_BIT(diagnostyka, ERROR_PRT_MEMORY_BIT) != 0)
+              ||
+              (
+               (_CHECK_SET_BIT(diagnostyka, ERROR_NO_FREE_DYNAMIC_MEMORY_BIT) != 0) &&
+               ((TIM2->CR1 & (TIM_CR1_CEN)) == 0) &&
+               ((TIM3->CR1 & (TIM_CR1_CEN)) == 0)
+              )
+             )
+            )
+          )  
+         )   
       {
         //Робимо копію тільки тоді, коли триґерна інформація успішно зчитана і сформована контрольна сума
         if (
