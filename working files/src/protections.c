@@ -865,8 +865,6 @@ void TIM2_IRQHandler(void)
    if (periodical_tasks_TEST_TRG_FUNC != 0)
     {
       //Стоїть у черзі активна задача зроботи резервні копії даних
-      //?if ((state_i2c_task & MASKA_FOR_BIT(STATE_TRG_FUNC_EEPROM_GOOD_BIT)) != 0)
-      
       if (
           ((state_i2c_task & MASKA_FOR_BIT(STATE_TRG_FUNC_EEPROM_GOOD_BIT)) != 0) &&
           (
