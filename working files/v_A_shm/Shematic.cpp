@@ -4645,7 +4645,7 @@ return sh.Init();;
 }
 
 void DoCalcWrp(void){
-  save_trg_info_for_Taras_code();
+  //..?save_trg_info_for_Taras_code();
   
 sh.DoCalc();
 //sh.DoCalcLUSources();
