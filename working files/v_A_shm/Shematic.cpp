@@ -4218,7 +4218,11 @@ long Shematic::Init(void) {
 
 //-void *memset(void *s, int c, size_t n);
 chInitTerminated = 0;
+
+memset(static_cast<void*>(&gLUAreaMem),0xcc,SIZE_MEM_BLK);//dbg code
+
 memset(static_cast<void*>(&gLUAreaMem),0,sizeof(SIZE_LU_AREA_LIST_ITEM));
+
 memset(static_cast<void*>(&gblLUAreaAuxVar),0,sizeof(gblLUAreaAuxVar));
 gblLUAreaAuxVar.lAmountFreeMem = (SIZE_MEM_BLK - sizeof (LUAreaListElem));
 gblLUAreaAuxVar.lAmountUsedMem = sizeof (LUAreaListElem);
