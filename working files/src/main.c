@@ -308,11 +308,7 @@ inline void periodical_operations(void)
            (
             (_CHECK_SET_BIT(diagnostyka, ERROR_PRT_MEMORY_BIT) != 0)
             ||
-            (
-             (_CHECK_SET_BIT(diagnostyka, ERROR_NO_FREE_DYNAMIC_MEMORY_BIT) != 0) &&
-             ((TIM2->CR1 & (TIM_CR1_CEN)) == 0) &&
-             ((TIM3->CR1 & (TIM_CR1_CEN)) == 0)
-            )
+            (_CHECK_SET_BIT(diagnostyka, ERROR_NO_FREE_DYNAMIC_MEMORY_BIT) != 0)
            )
           )
         )  
@@ -350,11 +346,7 @@ inline void periodical_operations(void)
            (
             (_CHECK_SET_BIT(diagnostyka, ERROR_PRT_MEMORY_BIT) != 0)
             ||
-            (
-             (_CHECK_SET_BIT(diagnostyka, ERROR_NO_FREE_DYNAMIC_MEMORY_BIT) != 0) &&
-             ((TIM2->CR1 & (TIM_CR1_CEN)) == 0) &&
-             ((TIM3->CR1 & (TIM_CR1_CEN)) == 0)
-            )
+            (_CHECK_SET_BIT(diagnostyka, ERROR_NO_FREE_DYNAMIC_MEMORY_BIT) != 0)
            )
           )
         )  
