@@ -4217,11 +4217,21 @@ return;
 long Shematic::Init(void) {
 
 //-void *memset(void *s, int c, size_t n);
-chInitTerminated = 0;
+
+    memset(static_cast<void*>(arIdxLUAreaListElem),0,sizeof(short)*TOTAL_LU);
+//?    pLUAreaList = static_cast<void*>(&gLUAreaMem.headLUAreaList);
+//    pExecSeq = static_cast<void*>(0);
+//    LL_CryaCrya++;
+    chInitTerminated = 0;
+//    chMaxIteratoin = 2;
+//    chIteration = 0;
+    shIdxSumNLedPlusNOutSeq = 0; 
+    shIdxSumNTUPlusNLANSeq  = 0; 
+    shIdxSum8ElemSeq        = 0; 
 
 memset(static_cast<void*>(&gLUAreaMem),0xcc,SIZE_MEM_BLK);//dbg code
 
-memset(static_cast<void*>(&gLUAreaMem),0,sizeof(SIZE_LU_AREA_LIST_ITEM));
+memset(static_cast<void*>(&gLUAreaMem),0,SIZE_LU_AREA_LIST_ITEM);//sizeof(
 
 memset(static_cast<void*>(&gblLUAreaAuxVar),0,sizeof(gblLUAreaAuxVar));
 gblLUAreaAuxVar.lAmountFreeMem = (SIZE_MEM_BLK - sizeof (LUAreaListElem));

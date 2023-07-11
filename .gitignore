@@ -9,6 +9,10 @@
 # Ігнорувати my.bat
 my.bat
 *.pdf
+*.hex
+*.mot
+*.s
+*.s??
 # Ігнорувати файли з папки settings/
 settings/
 
