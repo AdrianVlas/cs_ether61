@@ -303,6 +303,7 @@ extern int str_to_int_DATE_Mmm(void);
 extern void start_transmint_data_via_CANAL1_MO(void);
 extern void start_receive_data_via_CANAL1_MO(void);
 extern void CANAL2_MO_routine(void);
+extern void low_routine_for_KP(void);
 
 extern long ChangeCfg(void* pv);
 
