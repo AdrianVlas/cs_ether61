@@ -217,15 +217,7 @@ inline void periodical_operations(void)
   /*******************/
   //Управління Каналом 2 міжпроцесорного обміну між БАв і комунікаційною платою
   /*******************/
-  if (
-      (IEC_board_uncall == 0) &&
-      (Canal2 == false)  
-     )   
-  {
-    CANAL2_MO_routine();
-  }
-  else if ((Canal1 == true) && (Canal2 == true)) Canal2 = false;
-  Canal1 = false;
+  low_routine_for_KP();
   /*******************/
 
   /*******************/

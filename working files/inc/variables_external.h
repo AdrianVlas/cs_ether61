@@ -316,6 +316,7 @@ extern const uint8_t my_address_mo;
 extern uint32_t IEC_board_uncall;
 extern uint32_t IEC_board_address;
 extern uint32_t queue_mo, queue_mo_irq;
+extern unsigned int restart_KP_irq;
 extern uint32_t state_array_control_state;
 extern uint8_t IEC_time_edit[7]; 
 extern uint32_t IEC_save_time; 

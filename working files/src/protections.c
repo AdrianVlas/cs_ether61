@@ -714,8 +714,25 @@ void TIM2_IRQHandler(void)
     /***********************************************************/
     //Прийом інформації з комунікаційної плати
     /***********************************************************/
-    //Перевіряємо чи прийшли дані по каналу CANAL1_MO з комунікаційної плати
-    GPIO_CANAL1_MO_Out1->BSRRL = GPIO_PIN_CANAL1_MO_Out1; //Переводимо пін canal1_Out1 в стан "1"
+    if (restart_KP_irq == 0)
+    {
+      //Перевіряємо чи прийшли дані по каналу CANAL1_MO з комунікаційної плати
+      GPIO_CANAL1_MO_Out1->BSRRL = GPIO_PIN_CANAL1_MO_Out1; //Переводимо пін canal1_Out1 в стан "1"
+    }
+    else
+    {
+      _CLEAR_STATE(queue_mo, STATE_QUEUE_MO_RESTART_KP);
+      
+      if (--restart_KP_irq != 0) GPIO_KP_SOFT_RESET->BSRRL = GPIO_PIN_KP_SOFT_RESET; //Подаємо команду на перезапуск комунікаціної плати
+      else 
+      {
+//        if (clear_diagnostyka != NULL) _SET_BIT(clear_diagnostyka, EVENT_RESTART_CB_BIT);
+        GPIO_KP_SOFT_RESET->BSRRH = GPIO_PIN_KP_SOFT_RESET; //Знімаємо команду на перезапуск комунікаціної плати
+        
+        queue_mo_irq = 0;
+        IEC_board_uncall = 200;
+      }
+    }
     start_receive_data_via_CANAL1_MO();
     Canal1 = true;
     GPIO_CANAL1_MO_Out1->BSRRH = GPIO_PIN_CANAL1_MO_Out1; //Переводимо пін canal1_Out1 в стан "0"
