@@ -212,6 +212,40 @@ register long lResetKey = 0;
 }
 
 
+long CLULss::T4_2Ms(long lActivKey) {
+register long *plTmrVal = &m_Node4_2Ms.lTmrVal;
+register long lResetKey = 0;
+    if (lActivKey) {
+        if (m_chStateT4_2Ms == 0) {
+            lActivKey = 2;//m_MftSuit.lTWork;
+            *plTmrVal = lActivKey;
+            if (*plTmrVal != lActivKey)
+                *plTmrVal = lActivKey;
+            m_chStateT4_2Ms = 1;
+            return 1;
+        } else {
+            lActivKey = *plTmrVal;
+            if (lActivKey != 0)
+                return 1; //
+        }
+    } else {
+        if (m_chStateT4_2Ms == 1) {//Activated
+            lActivKey = *plTmrVal;
+            if (lActivKey != 0)
+                return 1; //
+            else
+                lResetKey = 1;
+        }
+    }
+    if (lResetKey) {
+        m_chStateT4_2Ms = 0;
+        *plTmrVal = 0;
+    }
+    return 0;	
+}
+
+
+
 #include "LuLss_p1.cpp"
 inline void CLULss::SetStateVarchQTrg(long lIdTrg, char&chQTrg) {
     if (lIdTrg == LSS_D_TRG_11__4_2) {
@@ -1285,7 +1319,7 @@ void CLULss::CalcLssSchematicOptManual_v1(void){
     rU = 0;
     U8_state_wrp stt_LULss_Not01__1_1,
         stt_LULss_And02__3_1,
-        stt_LULss_And03__3_1,
+        stt_LULss_And03__4_1,
         stt_LULss_And04__3_1,
         stt_LULss_Not05__1_1,
         stt_LULss_And06__2_1,
@@ -1314,13 +1348,15 @@ void CLULss::CalcLssSchematicOptManual_v1(void){
         stt_LULss_T_IMP_27__1_1,
         stt_LULss_T_IMP_28__1_1,
         stt_LULss_T_T_0_29__1_1,
-        stt_LULss_T_0_T_add1ms_29__1_1;
+        stt_LULss_T_0_T_add1ms_29__1_1,
+        stt_LULss_T_IMP_30__1_1,
+        stt_LULss_Not31__1_1;
         // @TIMER_T_0,
         // @_TIMER_0_T
         // @_TIMER_IMPULSE;
 stt_LULss_Not01__1_1.U8V = rU,
         stt_LULss_And02__3_1.U8V = rU,
-        stt_LULss_And03__3_1.U8V = rU,
+        stt_LULss_And03__4_1.U8V = rU,
         stt_LULss_And04__3_1.U8V = rU,
         stt_LULss_Not05__1_1.U8V = rU,
         stt_LULss_And06__2_1.U8V = rU,
@@ -1349,6 +1385,8 @@ stt_LULss_Not01__1_1.U8V = rU,
         stt_LULss_T_IMP_27__1_1.U8V = rU,
         stt_LULss_T_IMP_28__1_1.U8V = rU,
         stt_LULss_T_T_0_29__1_1.U8V = rU,
+        stt_LULss_T_IMP_30__1_1.U8V = rU,
+        stt_LULss_Not31__1_1.U8V = rU,
         stt_LULss_T_0_T_add1ms_29__1_1.U8V = rU;
 
     if (m_LssCfgSuit.chSel == LSS_MODE_SIMPLE)
@@ -1425,6 +1463,14 @@ stt_LULss_Not01__1_1.U8V = rU,
     stt_LULss_T_IMP_27__1_1.bool_val.bt0 = rU;
     lV = T1_1Ms(rU);
     stt_LULss_T_IMP_27__1_1.bool_val.bt7 = lV;
+
+    stt_LULss_T_IMP_30__1_1.bool_val.bt0 = rU;
+    lV = T4_2Ms(rU);
+    stt_LULss_T_IMP_30__1_1.bool_val.bt7 = lV;
+    
+    stt_LULss_Not31__1_1.bool_val.bt0 = lV;
+    rU =  stt_LULss_T_IMP_30__1_1.bool_val.bt7;
+    stt_LULss_Not31__1_1.bool_val.bt7 = (~rU)&1;
 
     stt_LULss_And06__2_1.bool_val.bt0 = stt_LULss_Not05__1_1.bool_val.bt7;
     stt_LULss_And06__2_1.bool_val.bt1 = wrp.bool_vars.LSS_NORMAL;
@@ -1515,11 +1561,13 @@ stt_LULss_Not01__1_1.U8V = rU,
     stt_LULss_Not01__1_1.bool_val.bt1 = rU;
     stt_LULss_Not01__1_1.bool_val.bt7 = (~rU)&1;
 
-    stt_LULss_And03__3_1.bool_val.bt0 = stt_LULss_DT_15__4_2.bool_val.bt7;
-    stt_LULss_And03__3_1.bool_val.bt1 = stt_LULss_Or_14__2_1.bool_val.bt7;
-    stt_LULss_And03__3_1.bool_val.bt2 = wrp.bool_vars.LSS_MUTE_I;
-    if(( stt_LULss_And03__3_1.U8V &7) == 7){
-         stt_LULss_And03__3_1.bool_val.bt7 = 1;
+    stt_LULss_And03__4_1.bool_val.bt0 = stt_LULss_DT_15__4_2.bool_val.bt7;
+    stt_LULss_And03__4_1.bool_val.bt1 = stt_LULss_Or_14__2_1.bool_val.bt7;
+    stt_LULss_And03__4_1.bool_val.bt2 = wrp.bool_vars.LSS_MUTE_I;
+    stt_LULss_And03__4_1.bool_val.bt3 = stt_LULss_Not31__1_1.bool_val.bt7;
+    
+    if(( stt_LULss_And03__4_1.U8V &15) == 7){
+         stt_LULss_And03__4_1.bool_val.bt7 = 1;
     } 
      rU = stt_LULss_DT_15__4_2.bool_val.bt7;
     stt_LULss_Not10__1_1.bool_val.bt1 = rU;
@@ -1562,7 +1610,7 @@ stt_LULss_Not01__1_1.U8V = rU,
 
 
     stt_LULss_Or_11__3_1.bool_val.bt0 = stt_LULss_And02__3_1.bool_val.bt7;
-    stt_LULss_Or_11__3_1.bool_val.bt1 = stt_LULss_And03__3_1.bool_val.bt7;
+    stt_LULss_Or_11__3_1.bool_val.bt1 = stt_LULss_And03__4_1.bool_val.bt7;
     stt_LULss_Or_11__3_1.bool_val.bt2 = stt_LULss_And04__3_1.bool_val.bt7;
     if((stt_LULss_Or_11__3_1.U8V &7) != 0){
         stt_LULss_Or_11__3_1.bool_val.bt7 = 1;

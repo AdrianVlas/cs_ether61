@@ -27,11 +27,13 @@ public:
     TmrNode m_Node1_1Ms;
     TmrNode m_Node1_2Ms;
     TmrNode m_Node1_3Ms;
+    TmrNode m_Node4_2Ms;
     TmrNode m_NodeCs;
     char m_chLinkedTimers; //Field bit
-    char m_chStateT1_1Ms;
-    char m_chStateT1_2Ms;
-    char m_chStateT1_3Ms;
+    char m_chStateT1_1Ms;//T1 on 1 ms
+    char m_chStateT1_2Ms;//T2 on 1 ms
+    char m_chStateT1_3Ms;//T3 on 1 ms
+    char m_chStateT4_2Ms;//Timer 4 on 2 ms
     char m_chStateTCs;
     char m_chQTrg29;
     char m_chQTrg11;
@@ -52,6 +54,7 @@ public:
     long T1_1Ms(long lActivKey);
     long T1_2Ms(long lActivKey);
     long T1_3Ms(long lActivKey);
+    long T4_2Ms(long lActivKey);
     long TCs(long lActivKey);
 //	void inline SetStateTrg(long lIdTrg, void* pvState);
 //	void inline ClrStateTrg(long lIdTrg, void* pvState);
