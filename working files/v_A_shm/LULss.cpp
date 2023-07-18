@@ -89,6 +89,10 @@ long CLULss::LinkLssTimers(void) {
         i++;
         m_chLinkedTimers |= 0x10;
     }
+    if (PushTmrNode(& m_Node4_2Ms)) {//static_cast<void*>(
+        i++;
+        m_chLinkedTimers |= 0x20;
+    }
     
     chGlSem--;
     return i;
