@@ -3805,7 +3805,7 @@ unsigned int resurs_control(__CONFIG const * const p_config)
   };
   
   int resurs = 84209;
-#define LIMIT 3000
+#define LIMIT 6000
   for (size_t i = 0; ((i < NUMBER_VAR_BLOCKS_CHANGED) && (resurs >= LIMIT)); ++i)
   {
     resurs -= (*p_field_arr[i])*resurs_nodes[i];
