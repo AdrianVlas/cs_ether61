@@ -9,10 +9,10 @@
 #include "../v_A_shm/I_Shm.h"
 #include "../v_A_shm/IStng.h"
 
-#include <intrinsics.h.>
+#include <intrinsics.h>
 
 /*******************************************************************************/
-//Робота з Wotchdog
+//Робота з Watchdog
 /*******************************************************************************/
 inline void watchdog_routine(void)
 {
@@ -122,8 +122,13 @@ inline void periodical_operations(void)
   {
     reinit_LCD = false;
     lcd_init();
-    new_state_keyboard |= (1<<BIT_REWRITE);
+    //new_state_keyboard |= (1u <<BIT_REWRITE);
+    //Обновити повністю весь екран
+    current_state_menu2.current_action = ACTION_WITH_CARRENT_EKRANE_FULL_UPDATE;
+    view_whole_ekran();
   }
+  
+  //Обробка дій системи меню
   main_manu_function_ver2();
   //Обновляємо інформацію на екрані
   view_whole_ekran();
