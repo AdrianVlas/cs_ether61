@@ -99,6 +99,7 @@ class Shematic
     short shIdxSum8ElemSeq;
 
 public:
+    char m_last_iteration;
     Shematic(void);
     ~Shematic(void);
     void DoCalc(void);

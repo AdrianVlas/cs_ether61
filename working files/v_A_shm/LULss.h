@@ -41,7 +41,16 @@ public:
     char m_chInC29;
     char m_chInC11;
     char m_chErrorQTrg11;
-    char m_chSkip_counter;
+    
+    //.char LSSIN_Imp_1Ms, LSSIN_Imp_2Ms, LSS_D_Imp_2Ms, RESET_Imp_1Ms;
+    
+    char  LSSIN_I_1ms_Prev;                 // For Timer Emulation 1MS      LSSIN_I_1ms,
+    char  LSSIN_I_2ms_Prev, LSSIN_I_2ms_Val;// For Timer Emulation 2MS      LSSIN_I_2ms,
+    char  LSS_D_2ms_Prev, LSS_D_2ms_Val;      // For Timer Emulation 2MS    LSS_D_2ms,  
+    char  RESET_I_1ms_Prev;                 // For Timer Emulation !MS      RESET_I_1ms,
+    
+    
+    
     short m_shAmountProcessedRec;
     short m_shStartRecord;
     unsigned long last_state_wrp;
@@ -66,6 +75,7 @@ public:
     inline long GetStateVarchInC (long lIdTrg);
     inline void SetTrg(long lIdTrg);
     inline void ClrTrg(long lIdTrg);
+     void ClearTrgTmrMemberVar(void);
     void UpdateCLss(void);
     long LinkLssTimers(void);
     friend void LssOp	(void *pObj);
@@ -77,3 +87,59 @@ extern const LedShcemasDscRecord* const arPLssShcemasSimpleModeDscRecords[];
 extern const short shPLssShcemasSimpleModeDscRecords;
 extern const LedShcemasDscRecord* const arPLssShcemasTriggerModeDscRecords[];
 extern const short shPLssShcemasTriggerModeDscRecords;
+
+#ifdef DEBUG_MODE
+
+
+typedef struct CsDBGRecord_tag{
+long luIterLU;
+
+char ch_LSS_LSSIN1;//
+char ch_LSS_MUTE_I;//
+
+char ch_T_IMP_27_bt0;
+char ch_T_IMP_27_bt7;
+char ch_T_IMP_30_bt0;
+char ch_T_IMP_30_bt7;
+
+
+char ch_T_T_0_29_bt0;
+char ch_T_T_0_29_bt1;
+char ch_T_0_T_add1ms_29_bt7;
+
+char ch_Or_18__3_1_bt0;
+char ch_DT_15__4_2_clr;
+char ch_DT_15__4_2_in ;
+char ch_DT_15__4_2_Q  ;
+
+char ch_Or_11__3_1_bt0;
+char ch_Or_11__3_1_bt1;
+char ch_Or_11__3_1_bt2;
+char ch_Or_11__3_1_bt7;
+char ch_Or_12__3_1_bt0;
+char ch_Or_12__3_1_bt1;
+char ch_Or_12__3_1_bt2;
+char ch_Or_12__3_1_bt7;
+//char ch_DT_13__4_2
+//char ch_DT_13__4_2
+//char ch_DT_13__4_2
+char ch_DT_13__4_2_Q  ;
+
+stt_LULss_Or_25_bt7;
+stt_LULss_Or_26_bt7;
+
+
+
+
+
+}CSSigDbgRecord;
+#define AMOIUNT_DBG_REC 100//2700
+//#define DEBUG_MODE 1
+
+extern CSSigDbgRecord  ArrCSSigDbgRec[AMOIUNT_DBG_REC];
+extern unsigned int uiIdxArrCSSigDbgRec ;
+extern void* pvCCSSigDbg;
+
+
+#endif
+

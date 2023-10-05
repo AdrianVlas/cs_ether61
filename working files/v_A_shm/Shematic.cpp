@@ -126,7 +126,7 @@ Shematic::Shematic(void) {
     shIdxSumNLedPlusNOutSeq = 0; 
     shIdxSumNTUPlusNLANSeq  = 0; 
     shIdxSum8ElemSeq        = 0; 
-
+    m_last_iteration = 0;
 }
 
 void Shematic::Init_(void) {
@@ -286,6 +286,10 @@ void Shematic::DoCalc(void) {
             j = chSumNTUPlusNLAN;
             LUIterator(j,i);//
             CLUBase::m_AuxInfo.ch++;
+            if( lDwnCtr == 2)
+                m_last_iteration = 1;
+            else
+                m_last_iteration = 0;
         //Predpolagaemyi uroven` vlozenosti
         }while(--lDwnCtr);
         
@@ -2354,6 +2358,8 @@ void Shematic::SetupCLULssStngParam(void *pv){
     locRef_CLULss.chTypeLogicFunction = LU_OP_LSS;
     locRef_CLULss.LogicFunc = LssOp;
     locRef_CLULss.LogicFunc(pInit2LcVarArea->pCLUBase);
+    //Clr Timers Triggers member vars
+    locRef_CLULss.ClearTrgTmrMemberVar();
     bool bbVar = false;
     do{
         __LN_ALARM *p__LN_ALARM;
